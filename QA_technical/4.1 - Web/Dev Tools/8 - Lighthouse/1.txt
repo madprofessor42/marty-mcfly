@@ -1,0 +1,15 @@
+Слабые места:
+
+Best Practices:
+
+- Includes front-end JavaScript libraries with known security vulnerabilities 1 vulnerability detected
+Some third-party scripts may contain known security vulnerabilities that are easily identified and exploited by attackers. Learn more.
+
+Сайт уязвим 
+
+
+
+PWA приложение:
+
+На сайте не реализована возможность установки PWA приложения, так как отсутствует манифест
+

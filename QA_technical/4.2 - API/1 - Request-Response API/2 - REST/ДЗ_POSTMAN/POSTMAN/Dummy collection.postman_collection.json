@@ -1,0 +1,1373 @@
+{
+	"info": {
+		"_postman_id": "473eb307-4787-4830-9740-04da3b90e0ab",
+		"name": "Dummy collection",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
+	},
+	"item": [
+		{
+			"name": "How to send request ",
+			"item": [
+				{
+					"name": "List availbalble Projects",
+					"request": {
+						"auth": {
+							"type": "basic",
+							"basic": [
+								{
+									"key": "password",
+									"value": "wstest",
+									"type": "string"
+								},
+								{
+									"key": "username",
+									"value": "qaverb",
+									"type": "string"
+								},
+								{
+									"key": "showPassword",
+									"value": false,
+									"type": "boolean"
+								}
+							]
+						},
+						"method": "GET",
+						"header": [
+							{
+								"key": "Content-Type",
+								"value": "text/xml"
+							},
+							{
+								"key": "Authorization",
+								"value": "Basic dXNlcjpiaXRuYW1p"
+							}
+						],
+						"url": {
+							"raw": "https://ws-tracks.demohoster.com/projects.xml",
+							"protocol": "https",
+							"host": [
+								"ws-tracks",
+								"demohoster",
+								"com"
+							],
+							"path": [
+								"projects.xml"
+							]
+						},
+						"description": "Get projects.xml"
+					},
+					"response": []
+				},
+				{
+					"name": "Add New Project",
+					"request": {
+						"auth": {
+							"type": "basic",
+							"basic": [
+								{
+									"key": "password",
+									"value": "wstest",
+									"type": "string"
+								},
+								{
+									"key": "username",
+									"value": "qaverb",
+									"type": "string"
+								},
+								{
+									"key": "showPassword",
+									"value": false,
+									"type": "boolean"
+								}
+							]
+						},
+						"method": "POST",
+						"header": [
+							{
+								"key": "Content-Type",
+								"value": "text/xml"
+							},
+							{
+								"key": "Authorization",
+								"value": "Basic dXNlcjpiaXRuYW1p"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "    <project>\n        <default-context-id type=\"integer\" nil=\"true\"/>\n        <default-tags></default-tags>\n        <description></description>\n        <name>projectname</name>\n    </project>"
+						},
+						"url": {
+							"raw": "https://ws-tracks.demohoster.com/projects.xml",
+							"protocol": "https",
+							"host": [
+								"ws-tracks",
+								"demohoster",
+								"com"
+							],
+							"path": [
+								"projects.xml"
+							]
+						},
+						"description": "\nGenerated from a curl request: \\ncurl -u user:bitnami -H \\\"Content-Type: text/xml\\\" -d \\\n'<project><name><![CDATA[<img src=logout/> ]]> This Project Will Log You Out</name></project>' http://192.168.1.147/projects.xml -i"
+					},
+					"response": []
+				},
+				{
+					"name": "Get Project ID",
+					"request": {
+						"auth": {
+							"type": "basic",
+							"basic": [
+								{
+									"key": "password",
+									"value": "wstest",
+									"type": "string"
+								},
+								{
+									"key": "username",
+									"value": "user",
+									"type": "string"
+								},
+								{
+									"key": "showPassword",
+									"value": false,
+									"type": "boolean"
+								}
+							]
+						},
+						"method": "GET",
+						"header": [
+							{
+								"key": "Content-Type",
+								"value": "text/xml"
+							},
+							{
+								"key": "Authorization",
+								"value": "Basic dXNlcjpiaXRuYW1p"
+							}
+						],
+						"url": {
+							"raw": "https://ws-tracks.demohoster.com/projects/ID.xml",
+							"protocol": "https",
+							"host": [
+								"ws-tracks",
+								"demohoster",
+								"com"
+							],
+							"path": [
+								"projects",
+								"ID.xml"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "AmendProject",
+					"request": {
+						"auth": {
+							"type": "basic",
+							"basic": [
+								{
+									"key": "password",
+									"value": "wstest",
+									"type": "string"
+								},
+								{
+									"key": "username",
+									"value": "user",
+									"type": "string"
+								},
+								{
+									"key": "showPassword",
+									"value": false,
+									"type": "boolean"
+								}
+							]
+						},
+						"method": "PUT",
+						"header": [
+							{
+								"key": "Content-Type",
+								"value": "text/xml"
+							},
+							{
+								"key": "Authorization",
+								"value": "Basic dXNlcjpiaXRuYW1p"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "    <project>\n        <default-context-id type=\"integer\" nil=\"true\"/>\n        <default-tags></default-tags>\n        <description></description>\n        <name>projectname</name>\n        <state>active</state>\n    </project>"
+						},
+						"url": {
+							"raw": "https://ws-tracks.demohoster.com/projects/ID.xml",
+							"protocol": "https",
+							"host": [
+								"ws-tracks",
+								"demohoster",
+								"com"
+							],
+							"path": [
+								"projects",
+								"ID.xml"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Delete Project ID",
+					"request": {
+						"auth": {
+							"type": "basic",
+							"basic": [
+								{
+									"key": "username",
+									"value": "user",
+									"type": "string"
+								},
+								{
+									"key": "password",
+									"value": "bitnami",
+									"type": "string"
+								},
+								{
+									"key": "showPassword",
+									"value": false,
+									"type": "boolean"
+								}
+							]
+						},
+						"method": "DELETE",
+						"header": [
+							{
+								"key": "Content-Type",
+								"value": "text/xml"
+							},
+							{
+								"key": "Authorization",
+								"value": "Basic dXNlcjpiaXRuYW1p"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": ""
+						},
+						"url": {
+							"raw": "https://ws-tracks.demohoster.com/projects/ID.xml",
+							"protocol": "https",
+							"host": [
+								"ws-tracks",
+								"demohoster",
+								"com"
+							],
+							"path": [
+								"projects",
+								"ID.xml"
+							]
+						}
+					},
+					"response": []
+				}
+			],
+			"description": "What is request?\nHTTP methods\nURI Params\nAuthorisation\nHeaders\nBody\nTests\nPre-request scripts",
+			"event": [
+				{
+					"listen": "prerequest",
+					"script": {
+						"type": "text/javascript",
+						"exec": [
+							""
+						]
+					}
+				},
+				{
+					"listen": "test",
+					"script": {
+						"type": "text/javascript",
+						"exec": [
+							""
+						]
+					}
+				}
+			]
+		},
+		{
+			"name": "How to set variable (Global, environment, collection, local, dynamic)",
+			"item": [
+				{
+					"name": "Add New Project with global variable (authorisation) (show base 64)",
+					"request": {
+						"auth": {
+							"type": "basic",
+							"basic": [
+								{
+									"key": "username",
+									"value": "{{user}}",
+									"type": "string"
+								},
+								{
+									"key": "password",
+									"value": "{{password}}",
+									"type": "string"
+								},
+								{
+									"key": "showPassword",
+									"value": false,
+									"type": "boolean"
+								}
+							]
+						},
+						"method": "POST",
+						"header": [
+							{
+								"key": "Content-Type",
+								"value": "text/xml"
+							},
+							{
+								"key": "Authorization",
+								"value": "Basic dXNlcjpiaXRuYW1p"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "    <project>\n        <default-context-id type=\"integer\" nil=\"true\"/>\n        <default-tags></default-tags>\n        <description></description>\n        <name>projectname</name>\n    </project>"
+						},
+						"url": {
+							"raw": "https://ws-tracks.demohoster.com/projects.xml",
+							"protocol": "https",
+							"host": [
+								"ws-tracks",
+								"demohoster",
+								"com"
+							],
+							"path": [
+								"projects.xml"
+							]
+						},
+						"description": "\nGenerated from a curl request: \\ncurl -u user:bitnami -H \\\"Content-Type: text/xml\\\" -d \\\n'<project><name><![CDATA[<img src=logout/> ]]> This Project Will Log You Out</name></project>' http://192.168.1.147/projects.xml -i"
+					},
+					"response": []
+				},
+				{
+					"name": "Add New Project with environmental variable (host)",
+					"request": {
+						"auth": {
+							"type": "basic",
+							"basic": [
+								{
+									"key": "password",
+									"value": "{{password}}",
+									"type": "string"
+								},
+								{
+									"key": "username",
+									"value": "{{user}}",
+									"type": "string"
+								},
+								{
+									"key": "showPassword",
+									"value": false,
+									"type": "boolean"
+								}
+							]
+						},
+						"method": "POST",
+						"header": [
+							{
+								"key": "Content-Type",
+								"value": "text/xml"
+							},
+							{
+								"key": "Authorization",
+								"value": "Basic dXNlcjpiaXRuYW1p"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "    <project>\n        <default-context-id type=\"integer\" nil=\"true\"/>\n        <default-tags></default-tags>\n        <description></description>\n        <name>projectname</name>\n    </project>"
+						},
+						"url": {
+							"raw": "https://{{URL}}/projects.xml",
+							"protocol": "https",
+							"host": [
+								"{{URL}}"
+							],
+							"path": [
+								"projects.xml"
+							]
+						},
+						"description": "\nGenerated from a curl request: \\ncurl -u user:bitnami -H \\\"Content-Type: text/xml\\\" -d \\\n'<project><name><![CDATA[<img src=logout/> ]]> This Project Will Log You Out</name></project>' http://192.168.1.147/projects.xml -i"
+					},
+					"response": []
+				},
+				{
+					"name": "Add New Project with collection variable (tag)",
+					"request": {
+						"auth": {
+							"type": "basic",
+							"basic": [
+								{
+									"key": "username",
+									"value": "{{user}}",
+									"type": "string"
+								},
+								{
+									"key": "password",
+									"value": "{{password}}",
+									"type": "string"
+								},
+								{
+									"key": "showPassword",
+									"value": false,
+									"type": "boolean"
+								}
+							]
+						},
+						"method": "POST",
+						"header": [
+							{
+								"key": "Content-Type",
+								"value": "text/xml"
+							},
+							{
+								"key": "Authorization",
+								"value": "Basic dXNlcjpiaXRuYW1p"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "    <project>\n        <default-context-id type=\"integer\" nil=\"true\"/>\n        <default-tags>{{tag}}</default-tags>\n        <description></description>\n        <name>projectname</name>\n    </project>"
+						},
+						"url": {
+							"raw": "https://{{URL}}/projects.xml",
+							"protocol": "https",
+							"host": [
+								"{{URL}}"
+							],
+							"path": [
+								"projects.xml"
+							]
+						},
+						"description": "\nGenerated from a curl request: \\ncurl -u user:bitnami -H \\\"Content-Type: text/xml\\\" -d \\\n'<project><name><![CDATA[<img src=logout/> ]]> This Project Will Log You Out</name></project>' http://192.168.1.147/projects.xml -i"
+					},
+					"response": []
+				},
+				{
+					"name": "Add New Project with local variable (tag)",
+					"event": [
+						{
+							"listen": "prerequest",
+							"script": {
+								"exec": [
+									"const tag = 'a2qa';                    // check the variable in the request body in the console",
+									"",
+									"",
+									"// const tag2 = 'a2qa'                // change the variable in the body and check request body in the console",
+									"",
+									"// // if (tag === tag2) {            // check console",
+									"// //     console.log('OK')",
+									"// // }"
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"auth": {
+							"type": "basic",
+							"basic": [
+								{
+									"key": "username",
+									"value": "{{user}}",
+									"type": "string"
+								},
+								{
+									"key": "password",
+									"value": "{{password}}",
+									"type": "string"
+								},
+								{
+									"key": "showPassword",
+									"value": false,
+									"type": "boolean"
+								}
+							]
+						},
+						"method": "POST",
+						"header": [
+							{
+								"key": "Content-Type",
+								"value": "text/xml"
+							},
+							{
+								"key": "Authorization",
+								"value": "Basic dXNlcjpiaXRuYW1p"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "    <project>\n        <default-context-id type=\"integer\" nil=\"true\"/>\n        <default-tags>{{tag}}</default-tags>\n        <description></description>\n        <name>projectname</name>\n    </project>"
+						},
+						"url": {
+							"raw": "https://{{URL}}/projects.xml",
+							"protocol": "https",
+							"host": [
+								"{{URL}}"
+							],
+							"path": [
+								"projects.xml"
+							]
+						},
+						"description": "\nGenerated from a curl request: \\ncurl -u user:bitnami -H \\\"Content-Type: text/xml\\\" -d \\\n'<project><name><![CDATA[<img src=logout/> ]]> This Project Will Log You Out</name></project>' http://192.168.1.147/projects.xml -i"
+					},
+					"response": []
+				},
+				{
+					"name": "Add New Project with dynamic variable (randomint, guid, timestamp)",
+					"event": [
+						{
+							"listen": "prerequest",
+							"script": {
+								"exec": [
+									"//let a = '{{$randomInt}}'   //send the request",
+									"",
+									"",
+									"// console.log(a)  // check the console",
+									"",
+									"//        <name>{{$randomInt}}</name>",
+									"//        <name>{{$guid}}</name>",
+									"//        <name>{{$timestamp}}</name>"
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"auth": {
+							"type": "basic",
+							"basic": [
+								{
+									"key": "username",
+									"value": "{{user}}",
+									"type": "string"
+								},
+								{
+									"key": "password",
+									"value": "{{password}}",
+									"type": "string"
+								},
+								{
+									"key": "showPassword",
+									"value": false,
+									"type": "boolean"
+								}
+							]
+						},
+						"method": "POST",
+						"header": [
+							{
+								"key": "Content-Type",
+								"value": "text/xml"
+							},
+							{
+								"key": "Authorization",
+								"value": "Basic dXNlcjpiaXRuYW1p"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "    <project>\n        <default-context-id type=\"integer\" nil=\"true\"/>\n        <default-tags></default-tags>\n        <description></description>\n        <name>{{$randomInt}}</name>\n    </project>"
+						},
+						"url": {
+							"raw": "https://{{URL}}/projects.xml",
+							"protocol": "https",
+							"host": [
+								"{{URL}}"
+							],
+							"path": [
+								"projects.xml"
+							]
+						},
+						"description": "\nGenerated from a curl request: \\ncurl -u user:bitnami -H \\\"Content-Type: text/xml\\\" -d \\\n'<project><name><![CDATA[<img src=logout/> ]]> This Project Will Log You Out</name></project>' http://192.168.1.147/projects.xml -i"
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "How to create test",
+			"item": [
+				{
+					"name": "Add New Project with status code test",
+					"event": [
+						{
+							"listen": "prerequest",
+							"script": {
+								"exec": [
+									""
+								],
+								"type": "text/javascript"
+							}
+						},
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"// Click 'status code : Code is 200 Snippet'",
+									"",
+									"// Rename the test name to \"Status code is 201\"",
+									"",
+									"// Change the target status in the request to 201",
+									"",
+									"// Change the target status in the reuqest to 404",
+									""
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"auth": {
+							"type": "basic",
+							"basic": [
+								{
+									"key": "password",
+									"value": "{{password}}",
+									"type": "string"
+								},
+								{
+									"key": "username",
+									"value": "{{user}}",
+									"type": "string"
+								},
+								{
+									"key": "showPassword",
+									"value": false,
+									"type": "boolean"
+								}
+							]
+						},
+						"method": "POST",
+						"header": [
+							{
+								"key": "Content-Type",
+								"value": "text/xml"
+							},
+							{
+								"key": "Authorization",
+								"value": "Basic dXNlcjpiaXRuYW1p"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "    <project>\n        <default-context-id type=\"integer\" nil=\"true\"/>\n        <default-tags></default-tags>\n        <description></description>\n        <name>{{$guid}}</name>\n    </project>"
+						},
+						"url": {
+							"raw": "https://{{URL}}/projects.xml",
+							"protocol": "https",
+							"host": [
+								"{{URL}}"
+							],
+							"path": [
+								"projects.xml"
+							]
+						},
+						"description": "\nGenerated from a curl request: \\ncurl -u user:bitnami -H \\\"Content-Type: text/xml\\\" -d \\\n'<project><name><![CDATA[<img src=logout/> ]]> This Project Will Log You Out</name></project>' http://192.168.1.147/projects.xml -i"
+					},
+					"response": []
+				},
+				{
+					"name": "Add New Project with response time test",
+					"event": [
+						{
+							"listen": "prerequest",
+							"script": {
+								"exec": [
+									""
+								],
+								"type": "text/javascript"
+							}
+						},
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"// pm.test(\"Status code is 200\", function () {",
+									"//     pm.response.to.have.status(200);",
+									"// });",
+									"",
+									"// Click 'Response time is less than 200ms",
+									"",
+									"// Change the test name to 'Response time is less than 66ms'",
+									""
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"auth": {
+							"type": "basic",
+							"basic": [
+								{
+									"key": "password",
+									"value": "{{password}}",
+									"type": "string"
+								},
+								{
+									"key": "username",
+									"value": "{{user}}",
+									"type": "string"
+								},
+								{
+									"key": "showPassword",
+									"value": false,
+									"type": "boolean"
+								}
+							]
+						},
+						"method": "POST",
+						"header": [
+							{
+								"key": "Content-Type",
+								"value": "text/xml"
+							},
+							{
+								"key": "Authorization",
+								"value": "Basic dXNlcjpiaXRuYW1p"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "    <project>\n        <default-context-id type=\"integer\" nil=\"true\"/>\n        <default-tags></default-tags>\n        <description></description>\n        <name>{{$guid}}</name>\n    </project>"
+						},
+						"url": {
+							"raw": "https://{{URL}}/projects.xml",
+							"protocol": "https",
+							"host": [
+								"{{URL}}"
+							],
+							"path": [
+								"projects.xml"
+							]
+						},
+						"description": "\nGenerated from a curl request: \\ncurl -u user:bitnami -H \\\"Content-Type: text/xml\\\" -d \\\n'<project><name><![CDATA[<img src=logout/> ]]> This Project Will Log You Out</name></project>' http://192.168.1.147/projects.xml -i"
+					},
+					"response": []
+				},
+				{
+					"name": "Add New Project with conditions",
+					"event": [
+						{
+							"listen": "prerequest",
+							"script": {
+								"exec": [
+									""
+								],
+								"type": "text/javascript"
+							}
+						},
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"if (pm.response.code == 201) {",
+									"    pm.test(\"Status code is 201\")",
+									"    pm.test(\"Response time is less than 200ms\", function () {",
+									"    pm.expect(pm.response.responseTime).to.be.below(200);",
+									"});",
+									"    ",
+									"}",
+									"else {",
+									"    pm.test(\"Status code is 201\", function (){",
+									"        throw new Error('Response code is '+pm.response.code +' while 201 was expected');",
+									"    })",
+									"}",
+									"",
+									"",
+									"",
+									""
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"auth": {
+							"type": "basic",
+							"basic": [
+								{
+									"key": "password",
+									"value": "{{password}}",
+									"type": "string"
+								},
+								{
+									"key": "username",
+									"value": "{{user}}",
+									"type": "string"
+								},
+								{
+									"key": "showPassword",
+									"value": false,
+									"type": "boolean"
+								}
+							]
+						},
+						"method": "POST",
+						"header": [
+							{
+								"key": "Content-Type",
+								"value": "text/xml"
+							},
+							{
+								"key": "Authorization",
+								"value": "Basic dXNlcjpiaXRuYW1p"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "    <project>\n        <default-context-id type=\"integer\" nil=\"true\"/>\n        <default-tags></default-tags>\n        <description></description>\n        <name>{{$guid}}</name>\n    </project>"
+						},
+						"url": {
+							"raw": "https://{{URL}}/projects.xml",
+							"protocol": "https",
+							"host": [
+								"{{URL}}"
+							],
+							"path": [
+								"projects.xml"
+							]
+						},
+						"description": "\nGenerated from a curl request: \\ncurl -u user:bitnami -H \\\"Content-Type: text/xml\\\" -d \\\n'<project><name><![CDATA[<img src=logout/> ]]> This Project Will Log You Out</name></project>' http://192.168.1.147/projects.xml -i"
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "How to chain requests",
+			"item": [
+				{
+					"name": "Let's create environmental variable using pre-request script!",
+					"event": [
+						{
+							"listen": "prerequest",
+							"script": {
+								"exec": [
+									"// Step 1: Click 'Set an environmental variable'",
+									"",
+									"// Replace key and values",
+									""
+								],
+								"type": "text/javascript"
+							}
+						},
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"// pm.test(\"Status code is 200\", function () {",
+									"//     pm.response.to.have.status(200);",
+									"// });",
+									"",
+									"// Click 'Response time is less than 200ms",
+									"",
+									"// Change the test name to 'Response time is less than 66ms'",
+									""
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"auth": {
+							"type": "basic",
+							"basic": [
+								{
+									"key": "password",
+									"value": "{{password}}",
+									"type": "string"
+								},
+								{
+									"key": "username",
+									"value": "{{user}}",
+									"type": "string"
+								},
+								{
+									"key": "showPassword",
+									"value": false,
+									"type": "boolean"
+								}
+							]
+						},
+						"method": "POST",
+						"header": [
+							{
+								"key": "Content-Type",
+								"value": "text/xml"
+							},
+							{
+								"key": "Authorization",
+								"value": "Basic dXNlcjpiaXRuYW1p"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "    <project>\n        <default-context-id type=\"integer\" nil=\"true\"/>\n        <default-tags></default-tags>\n        <description></description>\n        <name>{{$guid}}</name>\n    </project>"
+						},
+						"url": {
+							"raw": "https://{{URL}}/projects.xml",
+							"protocol": "https",
+							"host": [
+								"{{URL}}"
+							],
+							"path": [
+								"projects.xml"
+							]
+						},
+						"description": "\nGenerated from a curl request: \\ncurl -u user:bitnami -H \\\"Content-Type: text/xml\\\" -d \\\n'<project><name><![CDATA[<img src=logout/> ]]> This Project Will Log You Out</name></project>' http://192.168.1.147/projects.xml -i"
+					},
+					"response": []
+				},
+				{
+					"name": "Add New Project with unique projectname",
+					"event": [
+						{
+							"listen": "prerequest",
+							"script": {
+								"exec": [
+									"// Step 1: Google 'How to create random string JS' ",
+									"",
+									"",
+									"",
+									"",
+									"",
+									"// function makeid() {",
+									"//   var text = \"\";",
+									"//   var possible = \"ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789\";",
+									"",
+									"//   for (var i = 0; i < 5; i++)",
+									"//     text += possible.charAt(Math.floor(Math.random() * possible.length));",
+									"",
+									"//   return text;",
+									"// }",
+									"",
+									"// console.log(makeid());",
+									"",
+									"// Step 2: Modify function to create random string with 'n' length ",
+									"",
+									"// function makeid(n) {",
+									"//   var text = \"\";",
+									"//   var possible = \"ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789\";",
+									"",
+									"//   for (var i = 0; i < n; i++)",
+									"//     text += possible.charAt(Math.floor(Math.random() * possible.length));",
+									"",
+									"//   return text;",
+									"// }",
+									"",
+									"//console.log(makeid(50));",
+									"",
+									"// Set new variable",
+									"",
+									"// Edit request body"
+								],
+								"type": "text/javascript"
+							}
+						},
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"// pm.test(\"Status code is 200\", function () {",
+									"//     pm.response.to.have.status(200);",
+									"// });",
+									"",
+									"// pm.test(\"Response time is less than 200ms\", function () {",
+									"//     pm.expect(pm.response.responseTime).to.be.below(200);",
+									"// });",
+									"",
+									""
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"auth": {
+							"type": "basic",
+							"basic": [
+								{
+									"key": "password",
+									"value": "{{password}}",
+									"type": "string"
+								},
+								{
+									"key": "username",
+									"value": "{{user}}",
+									"type": "string"
+								},
+								{
+									"key": "showPassword",
+									"value": false,
+									"type": "boolean"
+								}
+							]
+						},
+						"method": "POST",
+						"header": [
+							{
+								"key": "Content-Type",
+								"value": "text/xml"
+							},
+							{
+								"key": "Authorization",
+								"value": "Basic dXNlcjpiaXRuYW1p"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "    <project>\n        <default-context-id type=\"integer\" nil=\"true\"/>\n        <default-tags></default-tags>\n        <description></description>\n        <name>{{$guid}}xxx</name>\n    </project>"
+						},
+						"url": {
+							"raw": "https://{{URL}}/projects.xml",
+							"protocol": "https",
+							"host": [
+								"{{URL}}"
+							],
+							"path": [
+								"projects.xml"
+							]
+						},
+						"description": "\nGenerated from a curl request: \\ncurl -u user:bitnami -H \\\"Content-Type: text/xml\\\" -d \\\n'<project><name><![CDATA[<img src=logout/> ]]> This Project Will Log You Out</name></project>' http://192.168.1.147/projects.xml -i"
+					},
+					"response": []
+				},
+				{
+					"name": "Get new project's ID",
+					"event": [
+						{
+							"listen": "prerequest",
+							"script": {
+								"exec": [
+									""
+								],
+								"type": "text/javascript"
+							}
+						},
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"// snippet convert response body xml to json",
+									"",
+									"// check the new jsonObject",
+									"",
+									"// How to Get project id",
+									"",
+									"// check the response structure",
+									"",
+									"//console.log(jsonObject)",
+									"",
+									"// Check the length of the array",
+									"",
+									"//console.log(jsonObject.projects.project.length)",
+									"",
+									"// Log the ID",
+									"",
+									"//let project_id = jsonObject.projects.project[(jsonObject.projects.project.length) - 1].id._",
+									"",
+									"",
+									"pm.environment.set(\"project_id\", project_id);"
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"auth": {
+							"type": "basic",
+							"basic": [
+								{
+									"key": "password",
+									"value": "{{password}}",
+									"type": "string"
+								},
+								{
+									"key": "username",
+									"value": "{{user}}",
+									"type": "string"
+								},
+								{
+									"key": "showPassword",
+									"value": false,
+									"type": "boolean"
+								}
+							]
+						},
+						"method": "GET",
+						"header": [
+							{
+								"key": "Content-Type",
+								"value": "text/xml"
+							},
+							{
+								"key": "Authorization",
+								"value": "Basic dXNlcjpiaXRuYW1p"
+							}
+						],
+						"url": {
+							"raw": "https://{{URL}}/projects.xml",
+							"protocol": "https",
+							"host": [
+								"{{URL}}"
+							],
+							"path": [
+								"projects.xml"
+							]
+						},
+						"description": "\nGenerated from a curl request: \\ncurl -u user:bitnami -H \\\"Content-Type: text/xml\\\" -d \\\n'<project><name><![CDATA[<img src=logout/> ]]> This Project Will Log You Out</name></project>' http://192.168.1.147/projects.xml -i"
+					},
+					"response": []
+				},
+				{
+					"name": "Get Project ID",
+					"request": {
+						"auth": {
+							"type": "basic",
+							"basic": [
+								{
+									"key": "username",
+									"value": "user",
+									"type": "string"
+								},
+								{
+									"key": "password",
+									"value": "bitnami",
+									"type": "string"
+								},
+								{
+									"key": "showPassword",
+									"value": false,
+									"type": "boolean"
+								}
+							]
+						},
+						"method": "GET",
+						"header": [
+							{
+								"key": "Content-Type",
+								"value": "text/xml"
+							},
+							{
+								"key": "Authorization",
+								"value": "Basic dXNlcjpiaXRuYW1p"
+							}
+						],
+						"url": {
+							"raw": "https://{{URL}}/projects/ID.xml",
+							"protocol": "https",
+							"host": [
+								"{{URL}}"
+							],
+							"path": [
+								"projects",
+								"ID.xml"
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "How to use Collection Runner without data variables",
+			"item": [
+				{
+					"name": "Add New Project with status code test",
+					"event": [
+						{
+							"listen": "prerequest",
+							"script": {
+								"exec": [
+									""
+								],
+								"type": "text/javascript"
+							}
+						},
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"pm.test(\"Status code is 201\", function () {",
+									"    pm.response.to.have.status(201",
+									"    );",
+									"});"
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"auth": {
+							"type": "basic",
+							"basic": [
+								{
+									"key": "password",
+									"value": "{{password}}",
+									"type": "string"
+								},
+								{
+									"key": "username",
+									"value": "{{user}}",
+									"type": "string"
+								},
+								{
+									"key": "showPassword",
+									"value": false,
+									"type": "boolean"
+								}
+							]
+						},
+						"method": "POST",
+						"header": [
+							{
+								"key": "Content-Type",
+								"value": "text/xml"
+							},
+							{
+								"key": "Authorization",
+								"value": "Basic dXNlcjpiaXRuYW1p"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "    <project>\n        <default-context-id type=\"integer\" nil=\"true\"/>\n        <default-tags></default-tags>\n        <description></description>\n        <name>1</name>\n    </project>"
+						},
+						"url": {
+							"raw": "https://{{URL}}/projects.xml",
+							"protocol": "https",
+							"host": [
+								"{{URL}}"
+							],
+							"path": [
+								"projects.xml"
+							]
+						},
+						"description": "\nGenerated from a curl request: \\ncurl -u user:bitnami -H \\\"Content-Type: text/xml\\\" -d \\\n'<project><name><![CDATA[<img src=logout/> ]]> This Project Will Log You Out</name></project>' http://192.168.1.147/projects.xml -i"
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "How to use Collection Runner with data variables",
+			"item": [
+				{
+					"name": "Add New Project with status code test",
+					"event": [
+						{
+							"listen": "prerequest",
+							"script": {
+								"type": "text/javascript",
+								"exec": [
+									""
+								]
+							}
+						},
+						{
+							"listen": "test",
+							"script": {
+								"type": "text/javascript",
+								"exec": [
+									"pm.test(\"Status code is 201\", function () {",
+									"    pm.response.to.have.status(201",
+									"    );",
+									"});"
+								]
+							}
+						}
+					],
+					"request": {
+						"auth": {
+							"type": "basic",
+							"basic": [
+								{
+									"key": "password",
+									"value": "{{password}}",
+									"type": "string"
+								},
+								{
+									"key": "username",
+									"value": "{{user}}",
+									"type": "string"
+								},
+								{
+									"key": "showPassword",
+									"value": false,
+									"type": "boolean"
+								}
+							]
+						},
+						"method": "POST",
+						"header": [
+							{
+								"key": "Content-Type",
+								"value": "text/xml"
+							},
+							{
+								"key": "Authorization",
+								"value": "Basic dXNlcjpiaXRuYW1p"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "    <project>\n        <default-context-id type=\"integer\" nil=\"true\"/>\n        <default-tags></default-tags>\n        <description></description>\n        <name>1</name>\n    </project>"
+						},
+						"url": {
+							"raw": "http://{{URL}}/projects.xml",
+							"protocol": "http",
+							"host": [
+								"{{URL}}"
+							],
+							"path": [
+								"projects.xml"
+							]
+						},
+						"description": "\nGenerated from a curl request: \\ncurl -u user:bitnami -H \\\"Content-Type: text/xml\\\" -d \\\n'<project><name><![CDATA[<img src=logout/> ]]> This Project Will Log You Out</name></project>' http://192.168.1.147/projects.xml -i"
+					},
+					"response": []
+				}
+			]
+		}
+	],
+	"event": [
+		{
+			"listen": "prerequest",
+			"script": {
+				"type": "text/javascript",
+				"exec": [
+					""
+				]
+			}
+		},
+		{
+			"listen": "test",
+			"script": {
+				"type": "text/javascript",
+				"exec": [
+					""
+				]
+			}
+		}
+	],
+	"variable": [
+		{
+			"key": "tag",
+			"value": "a1qa",
+			"type": "string"
+		}
+	]
+}

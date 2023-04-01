@@ -1,0 +1,4549 @@
+{
+	"info": {
+		"_postman_id": "7cde8e29-beed-47cd-aef7-a49f4a219ff3",
+		"name": "Tracks WS HomeWork",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
+	},
+	"item": [
+		{
+			"name": "Add Project",
+			"item": [
+				{
+					"name": "Random Values",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"const json = xml2Json(responseBody);\r",
+									"const id = pm.response.headers.get('text')\r",
+									"pm.collectionVariables.set(\"projectID\", id);\r",
+									"\r",
+									"pm.test(\"Status code is 201\", function () {\r",
+									"    pm.response.to.have.status(201);\r",
+									"});\r",
+									"\r",
+									""
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Content-Type",
+								"value": "text/xml"
+							},
+							{
+								"key": "Authorization",
+								"value": "Basic dXNlcjpiaXRuYW1p"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "    <project>\n        <default-context-id type=\"integer\" nil=\"true\"/>\n        <default-tags>{{$randomUserName}}</default-tags>\n        <description>{{$randomEmail}}</description>\n        <name>{{$randomFirstName}}</name>\n    </project>"
+						},
+						"url": {
+							"raw": "{{ws-tracks}}/projects.xml",
+							"host": [
+								"{{ws-tracks}}"
+							],
+							"path": [
+								"projects.xml"
+							]
+						},
+						"description": "\nGenerated from a curl request: \\ncurl -u user:bitnami -H \\\"Content-Type: text/xml\\\" -d \\\n'<project><name><![CDATA[<img src=logout/> ]]> This Project Will Log You Out</name></project>' http://192.168.1.147/projects.xml -i"
+					},
+					"response": []
+				},
+				{
+					"name": "Random Values No Auth",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"const json = xml2Json(responseBody);\r",
+									"const id = pm.response.headers.get('text')\r",
+									"pm.collectionVariables.set(\"projectID\", id);\r",
+									"\r",
+									"pm.test(\"Status code is 401\", function () {\r",
+									"    pm.response.to.have.status(401);\r",
+									"});\r",
+									"\r",
+									""
+								],
+								"type": "text/javascript"
+							}
+						},
+						{
+							"listen": "prerequest",
+							"script": {
+								"exec": [
+									"const jar = pm.cookies.jar();\r",
+									"\r",
+									"pm.request.url.host = [pm.environment.get(\"ws-tracks\")];\r",
+									"jar.clear(pm.request.url, (error) => {\r",
+									"    if (error)\r",
+									"        console.error(error);\r",
+									"});\r",
+									"\r",
+									"//Скрипт на автоматическую очистку кук все равно не работает :("
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"auth": {
+							"type": "noauth"
+						},
+						"method": "POST",
+						"header": [
+							{
+								"key": "Content-Type",
+								"value": "text/xml"
+							},
+							{
+								"key": "Authorization",
+								"value": "Basic dXNlcjpiaXRuYW1p"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "    <project>\n        <default-context-id type=\"integer\" nil=\"true\"/>\n        <default-tags>{{$randomUserName}}</default-tags>\n        <description>{{$randomEmail}}</description>\n        <name>{{$randomFirstName}}</name>\n    </project>"
+						},
+						"url": {
+							"raw": "{{ws-tracks}}/projects.xml",
+							"host": [
+								"{{ws-tracks}}"
+							],
+							"path": [
+								"projects.xml"
+							]
+						},
+						"description": "\nGenerated from a curl request: \\ncurl -u user:bitnami -H \\\"Content-Type: text/xml\\\" -d \\\n'<project><name><![CDATA[<img src=logout/> ]]> This Project Will Log You Out</name></project>' http://192.168.1.147/projects.xml -i"
+					},
+					"response": []
+				},
+				{
+					"name": "Wrong order of fields",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"const json = xml2Json(responseBody);\r",
+									"const id = pm.response.headers.get('text')\r",
+									"pm.collectionVariables.set(\"projectID\", id);\r",
+									"\r",
+									"pm.test(\"Status code is 201\", function () {\r",
+									"    pm.response.to.have.status(201);\r",
+									"});\r",
+									"\r",
+									""
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Content-Type",
+								"value": "text/xml"
+							},
+							{
+								"key": "Authorization",
+								"value": "Basic dXNlcjpiaXRuYW1p"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "    <project>\n        <default-tags>{{$randomUserName}}</default-tags>\n        <description>{{$randomEmail}}</description>\n        <name>{{$randomFirstName}}</name>\n        <default-context-id type=\"integer\" nil=\"true\"/>\n    </project>"
+						},
+						"url": {
+							"raw": "{{ws-tracks}}/projects.xml",
+							"host": [
+								"{{ws-tracks}}"
+							],
+							"path": [
+								"projects.xml"
+							]
+						},
+						"description": "\nGenerated from a curl request: \\ncurl -u user:bitnami -H \\\"Content-Type: text/xml\\\" -d \\\n'<project><name><![CDATA[<img src=logout/> ]]> This Project Will Log You Out</name></project>' http://192.168.1.147/projects.xml -i"
+					},
+					"response": []
+				},
+				{
+					"name": "Duplicated fields",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"const json = xml2Json(responseBody);\r",
+									"const id = pm.response.headers.get('text')\r",
+									"pm.collectionVariables.set(\"projectID\", id);\r",
+									"\r",
+									"pm.test(\"Status code is 409\", function () {\r",
+									"    pm.response.to.have.status(409);\r",
+									"});\r",
+									"\r",
+									""
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Content-Type",
+								"value": "text/xml"
+							},
+							{
+								"key": "Authorization",
+								"value": "Basic dXNlcjpiaXRuYW1p"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "    <project>\n        <default-context-id type=\"integer\" nil=\"true\"/>\n        <default-tags>{{$randomUserName}}</default-tags>\n        <default-tags>{{$randomUserName}}</default-tags>\n        <description>{{$randomEmail}}</description>\n        <description>{{$randomEmail}}</description>\n        <name>{{$randomFirstName}}</name>\n        <name>{{$randomFirstName}}</name>\n    </project>"
+						},
+						"url": {
+							"raw": "{{ws-tracks}}/projects.xml",
+							"host": [
+								"{{ws-tracks}}"
+							],
+							"path": [
+								"projects.xml"
+							]
+						},
+						"description": "\nGenerated from a curl request: \\ncurl -u user:bitnami -H \\\"Content-Type: text/xml\\\" -d \\\n'<project><name><![CDATA[<img src=logout/> ]]> This Project Will Log You Out</name></project>' http://192.168.1.147/projects.xml -i"
+					},
+					"response": []
+				},
+				{
+					"name": "Non existant fields",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"const json = xml2Json(responseBody);\r",
+									"const id = pm.response.headers.get('text')\r",
+									"pm.collectionVariables.set(\"projectID\", id);\r",
+									"\r",
+									"pm.test(\"Status code is 201\", function () {\r",
+									"    pm.response.to.have.status(201);\r",
+									"});\r",
+									"\r",
+									""
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Content-Type",
+								"value": "text/xml"
+							},
+							{
+								"key": "Authorization",
+								"value": "Basic dXNlcjpiaXRuYW1p"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "    <project>\n        <default-context-id type=\"integer\" nil=\"true\"/>\n        <default-tags>{{$randomUserName}}</default-tags>\n        <description>{{$randomEmail}}</description>\n        <name>{{$randomFirstName}}</name>\n        <age>26</age>\n    </project>"
+						},
+						"url": {
+							"raw": "{{ws-tracks}}/projects.xml",
+							"host": [
+								"{{ws-tracks}}"
+							],
+							"path": [
+								"projects.xml"
+							]
+						},
+						"description": "\nGenerated from a curl request: \\ncurl -u user:bitnami -H \\\"Content-Type: text/xml\\\" -d \\\n'<project><name><![CDATA[<img src=logout/> ]]> This Project Will Log You Out</name></project>' http://192.168.1.147/projects.xml -i"
+					},
+					"response": []
+				},
+				{
+					"name": "Tags which includes numbers, letters, symbols",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"const json = xml2Json(responseBody);\r",
+									"const id = pm.response.headers.get('text')\r",
+									"pm.collectionVariables.set(\"projectID\", id);\r",
+									"\r",
+									"pm.test(\"Status code is 201\", function () {\r",
+									"    pm.response.to.have.status(201);\r",
+									"});"
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Content-Type",
+								"value": "text/xml"
+							},
+							{
+								"key": "Authorization",
+								"value": "Basic dXNlcjpiaXRuYW1p"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "    <project>\n        <default-context-id type=\"integer\" nil=\"true\"/>\n        <default-tags>/*-+Hello_This.Is!@#$%^&*()_+test<>?{}|\"::\"</default-tags>\n        <description>{{$randomEmail}}</description>\n        <name>{{$randomFirstName}}</name>\n    </project>"
+						},
+						"url": {
+							"raw": "{{ws-tracks}}/projects.xml",
+							"host": [
+								"{{ws-tracks}}"
+							],
+							"path": [
+								"projects.xml"
+							]
+						},
+						"description": "\nGenerated from a curl request: \\ncurl -u user:bitnami -H \\\"Content-Type: text/xml\\\" -d \\\n'<project><name><![CDATA[<img src=logout/> ]]> This Project Will Log You Out</name></project>' http://192.168.1.147/projects.xml -i"
+					},
+					"response": []
+				},
+				{
+					"name": "Tags which includes <b>tags</b>",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"const json = xml2Json(responseBody);\r",
+									"const id = pm.response.headers.get('text')\r",
+									"pm.collectionVariables.set(\"projectID\", id);\r",
+									"\r",
+									"pm.test(\"Status code is 201\", function () {\r",
+									"    pm.response.to.have.status(201);\r",
+									"});"
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Content-Type",
+								"value": "text/xml"
+							},
+							{
+								"key": "Authorization",
+								"value": "Basic dXNlcjpiaXRuYW1p"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "    <project>\n        <default-context-id type=\"integer\" nil=\"true\"/>\n        <default-tags>&lt;b&gt;{{$randomUserName}}&lt;/b&gt;</default-tags>\n        <description>{{$randomEmail}}</description>\n        <name>{{$randomFirstName}}</name>\n    </project>"
+						},
+						"url": {
+							"raw": "{{ws-tracks}}/projects.xml",
+							"host": [
+								"{{ws-tracks}}"
+							],
+							"path": [
+								"projects.xml"
+							]
+						},
+						"description": "\nGenerated from a curl request: \\ncurl -u user:bitnami -H \\\"Content-Type: text/xml\\\" -d \\\n'<project><name><![CDATA[<img src=logout/> ]]> This Project Will Log You Out</name></project>' http://192.168.1.147/projects.xml -i"
+					},
+					"response": []
+				},
+				{
+					"name": "Tags which includes only spaces",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"const json = xml2Json(responseBody);\r",
+									"const id = pm.response.headers.get('text')\r",
+									"pm.collectionVariables.set(\"projectID\", id);\r",
+									"\r",
+									"pm.test(\"Status code is 201\", function () {\r",
+									"    pm.response.to.have.status(201);\r",
+									"});"
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Content-Type",
+								"value": "text/xml"
+							},
+							{
+								"key": "Authorization",
+								"value": "Basic dXNlcjpiaXRuYW1p"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "    <project>\n        <default-context-id type=\"integer\" nil=\"true\"/>\n        <default-tags>            </default-tags>\n        <description>{{$randomEmail}}</description>\n        <name>{{$randomFirstName}}</name>\n    </project>"
+						},
+						"url": {
+							"raw": "{{ws-tracks}}/projects.xml",
+							"host": [
+								"{{ws-tracks}}"
+							],
+							"path": [
+								"projects.xml"
+							]
+						},
+						"description": "\nGenerated from a curl request: \\ncurl -u user:bitnami -H \\\"Content-Type: text/xml\\\" -d \\\n'<project><name><![CDATA[<img src=logout/> ]]> This Project Will Log You Out</name></project>' http://192.168.1.147/projects.xml -i"
+					},
+					"response": []
+				},
+				{
+					"name": "Tags is empty",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"const json = xml2Json(responseBody);\r",
+									"const id = pm.response.headers.get('text')\r",
+									"pm.collectionVariables.set(\"projectID\", id);\r",
+									"\r",
+									"pm.test(\"Status code is 201\", function () {\r",
+									"    pm.response.to.have.status(201);\r",
+									"});"
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Content-Type",
+								"value": "text/xml"
+							},
+							{
+								"key": "Authorization",
+								"value": "Basic dXNlcjpiaXRuYW1p"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "    <project>\n        <default-context-id type=\"integer\" nil=\"true\"/>\n        <default-tags></default-tags>\n        <description>{{$randomEmail}}</description>\n        <name>{{$randomFirstName}}</name>\n    </project>"
+						},
+						"url": {
+							"raw": "{{ws-tracks}}/projects.xml",
+							"host": [
+								"{{ws-tracks}}"
+							],
+							"path": [
+								"projects.xml"
+							]
+						},
+						"description": "\nGenerated from a curl request: \\ncurl -u user:bitnami -H \\\"Content-Type: text/xml\\\" -d \\\n'<project><name><![CDATA[<img src=logout/> ]]> This Project Will Log You Out</name></project>' http://192.168.1.147/projects.xml -i"
+					},
+					"response": []
+				},
+				{
+					"name": "Tags is missing",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"const json = xml2Json(responseBody);\r",
+									"const id = pm.response.headers.get('text')\r",
+									"pm.collectionVariables.set(\"projectID\", id);\r",
+									"\r",
+									"pm.test(\"Status code is 201\", function () {\r",
+									"    pm.response.to.have.status(201);\r",
+									"});"
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Content-Type",
+								"value": "text/xml"
+							},
+							{
+								"key": "Authorization",
+								"value": "Basic dXNlcjpiaXRuYW1p"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "    <project>\n        <default-context-id type=\"integer\" nil=\"true\"/>\n        <description>{{$randomEmail}}</description>\n        <name>{{$randomFirstName}}</name>\n    </project>"
+						},
+						"url": {
+							"raw": "{{ws-tracks}}/projects.xml",
+							"host": [
+								"{{ws-tracks}}"
+							],
+							"path": [
+								"projects.xml"
+							]
+						},
+						"description": "\nGenerated from a curl request: \\ncurl -u user:bitnami -H \\\"Content-Type: text/xml\\\" -d \\\n'<project><name><![CDATA[<img src=logout/> ]]> This Project Will Log You Out</name></project>' http://192.168.1.147/projects.xml -i"
+					},
+					"response": []
+				},
+				{
+					"name": "Tags 255 characters long",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"const json = xml2Json(responseBody);\r",
+									"const id = pm.response.headers.get('text')\r",
+									"pm.collectionVariables.set(\"projectID\", id);\r",
+									"\r",
+									"pm.test(\"Status code is 201\", function () {\r",
+									"    pm.response.to.have.status(201);\r",
+									"});"
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Content-Type",
+								"value": "text/xml"
+							},
+							{
+								"key": "Authorization",
+								"value": "Basic dXNlcjpiaXRuYW1p"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "    <project>\n        <default-context-id type=\"integer\" nil=\"true\"/>\n        <default-tags>{{$randomUUID}}000012345678901234567890123456789012345678901234567890123456789012345678901234567890123456789012345678901234567890123456789012345678901234567890123456789012345678901234567890123456789012345678901234567890123456789012345</default-tags>\n        <description>{{$randomEmail}}</description>\n        <name>{{$randomFirstName}}</name>\n    </project>"
+						},
+						"url": {
+							"raw": "{{ws-tracks}}/projects.xml",
+							"host": [
+								"{{ws-tracks}}"
+							],
+							"path": [
+								"projects.xml"
+							]
+						},
+						"description": "\nGenerated from a curl request: \\ncurl -u user:bitnami -H \\\"Content-Type: text/xml\\\" -d \\\n'<project><name><![CDATA[<img src=logout/> ]]> This Project Will Log You Out</name></project>' http://192.168.1.147/projects.xml -i"
+					},
+					"response": []
+				},
+				{
+					"name": "Tags 256 characters long",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"const json = xml2Json(responseBody);\r",
+									"const id = pm.response.headers.get('text')\r",
+									"pm.collectionVariables.set(\"projectID\", id);\r",
+									"\r",
+									"pm.test(\"Status code is 201\", function () {\r",
+									"    pm.response.to.have.status(201);\r",
+									"});"
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Content-Type",
+								"value": "text/xml"
+							},
+							{
+								"key": "Authorization",
+								"value": "Basic dXNlcjpiaXRuYW1p"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "    <project>\n        <default-context-id type=\"integer\" nil=\"true\"/>\n        <default-tags>{{$randomUUID}}0000123456789012345678901234567890123456789012345678901234567890123456789012345678901234567890123456789012345678901234567890123456789012345678901234567890123456789012345678901234567890123456789012345678901234567890123456</default-tags>\n        <description>{{$randomEmail}}</description>\n        <name>{{$randomFirstName}}</name>\n    </project>"
+						},
+						"url": {
+							"raw": "{{ws-tracks}}/projects.xml",
+							"host": [
+								"{{ws-tracks}}"
+							],
+							"path": [
+								"projects.xml"
+							]
+						},
+						"description": "\nGenerated from a curl request: \\ncurl -u user:bitnami -H \\\"Content-Type: text/xml\\\" -d \\\n'<project><name><![CDATA[<img src=logout/> ]]> This Project Will Log You Out</name></project>' http://192.168.1.147/projects.xml -i"
+					},
+					"response": []
+				},
+				{
+					"name": "Tags 257 characters long",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"const json = xml2Json(responseBody);\r",
+									"const id = pm.response.headers.get('text')\r",
+									"pm.collectionVariables.set(\"projectID\", id);\r",
+									"\r",
+									"pm.test(\"Status code is 409\", function () {\r",
+									"    pm.response.to.have.status(409);\r",
+									"});"
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Content-Type",
+								"value": "text/xml"
+							},
+							{
+								"key": "Authorization",
+								"value": "Basic dXNlcjpiaXRuYW1p"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "    <project>\n        <default-context-id type=\"integer\" nil=\"true\"/>\n        <default-tags>{{$randomUUID}}00001234567890123456789012345678901234567890123456789012345678901234567890123456789012345678901234567890123456789012345678901234567890123456789012345678901234567890123456789012345678901234567890123456789012345678901234567</default-tags>\n        <description>{{$randomEmail}}</description>\n        <name>{{$randomFirstName}}</name>\n    </project>"
+						},
+						"url": {
+							"raw": "{{ws-tracks}}/projects.xml",
+							"host": [
+								"{{ws-tracks}}"
+							],
+							"path": [
+								"projects.xml"
+							]
+						},
+						"description": "\nGenerated from a curl request: \\ncurl -u user:bitnami -H \\\"Content-Type: text/xml\\\" -d \\\n'<project><name><![CDATA[<img src=logout/> ]]> This Project Will Log You Out</name></project>' http://192.168.1.147/projects.xml -i"
+					},
+					"response": []
+				},
+				{
+					"name": "Description which includes numbers, letters, symbols",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"const json = xml2Json(responseBody);\r",
+									"const id = pm.response.headers.get('text')\r",
+									"pm.collectionVariables.set(\"projectID\", id);\r",
+									"\r",
+									"pm.test(\"Status code is 201\", function () {\r",
+									"    pm.response.to.have.status(201);\r",
+									"});"
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Content-Type",
+								"value": "text/xml"
+							},
+							{
+								"key": "Authorization",
+								"value": "Basic dXNlcjpiaXRuYW1p"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "    <project>\n        <default-context-id type=\"integer\" nil=\"true\"/>\n        <default-tags>{{$randomUserName}}</default-tags>\n        <description>/*-+Hello_This.Is!@#$%^&*()_+test<>?{}|\"::\"</description>\n        <name>{{$randomFirstName}}</name>\n    </project>"
+						},
+						"url": {
+							"raw": "{{ws-tracks}}/projects.xml",
+							"host": [
+								"{{ws-tracks}}"
+							],
+							"path": [
+								"projects.xml"
+							]
+						},
+						"description": "\nGenerated from a curl request: \\ncurl -u user:bitnami -H \\\"Content-Type: text/xml\\\" -d \\\n'<project><name><![CDATA[<img src=logout/> ]]> This Project Will Log You Out</name></project>' http://192.168.1.147/projects.xml -i"
+					},
+					"response": []
+				},
+				{
+					"name": "Description which includes  <b>tags</b>",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"const json = xml2Json(responseBody);\r",
+									"const id = pm.response.headers.get('text')\r",
+									"pm.collectionVariables.set(\"projectID\", id);\r",
+									"\r",
+									"pm.test(\"Status code is 201\", function () {\r",
+									"    pm.response.to.have.status(201);\r",
+									"});"
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Content-Type",
+								"value": "text/xml"
+							},
+							{
+								"key": "Authorization",
+								"value": "Basic dXNlcjpiaXRuYW1p"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "    <project>\n        <default-context-id type=\"integer\" nil=\"true\"/>\n        <default-tags>{{$randomUserName}}</default-tags>\n        <description>&lt;b&gt;{{$randomEmail}}&lt;/b&gt;</description>\n        <name>{{$randomFirstName}}</name>\n    </project>"
+						},
+						"url": {
+							"raw": "{{ws-tracks}}/projects.xml",
+							"host": [
+								"{{ws-tracks}}"
+							],
+							"path": [
+								"projects.xml"
+							]
+						},
+						"description": "\nGenerated from a curl request: \\ncurl -u user:bitnami -H \\\"Content-Type: text/xml\\\" -d \\\n'<project><name><![CDATA[<img src=logout/> ]]> This Project Will Log You Out</name></project>' http://192.168.1.147/projects.xml -i"
+					},
+					"response": []
+				},
+				{
+					"name": "Description which includes  only spaces",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"const json = xml2Json(responseBody);\r",
+									"const id = pm.response.headers.get('text')\r",
+									"pm.collectionVariables.set(\"projectID\", id);\r",
+									"\r",
+									"pm.test(\"Status code is 201\", function () {\r",
+									"    pm.response.to.have.status(201);\r",
+									"});"
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Content-Type",
+								"value": "text/xml"
+							},
+							{
+								"key": "Authorization",
+								"value": "Basic dXNlcjpiaXRuYW1p"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "    <project>\n        <default-context-id type=\"integer\" nil=\"true\"/>\n        <default-tags>{{$randomUserName}}</default-tags>\n        <description>     </description>\n        <name>{{$randomFirstName}}</name>\n    </project>"
+						},
+						"url": {
+							"raw": "{{ws-tracks}}/projects.xml",
+							"host": [
+								"{{ws-tracks}}"
+							],
+							"path": [
+								"projects.xml"
+							]
+						},
+						"description": "\nGenerated from a curl request: \\ncurl -u user:bitnami -H \\\"Content-Type: text/xml\\\" -d \\\n'<project><name><![CDATA[<img src=logout/> ]]> This Project Will Log You Out</name></project>' http://192.168.1.147/projects.xml -i"
+					},
+					"response": []
+				},
+				{
+					"name": "Description is empty",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"const json = xml2Json(responseBody);\r",
+									"const id = pm.response.headers.get('text')\r",
+									"pm.collectionVariables.set(\"projectID\", id);\r",
+									"\r",
+									"pm.test(\"Status code is 201\", function () {\r",
+									"    pm.response.to.have.status(201);\r",
+									"});"
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Content-Type",
+								"value": "text/xml"
+							},
+							{
+								"key": "Authorization",
+								"value": "Basic dXNlcjpiaXRuYW1p"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "    <project>\n        <default-context-id type=\"integer\" nil=\"true\"/>\n        <default-tags>{{$randomUserName}}</default-tags>\n        <description></description>\n        <name>{{$randomFirstName}}</name>\n    </project>"
+						},
+						"url": {
+							"raw": "{{ws-tracks}}/projects.xml",
+							"host": [
+								"{{ws-tracks}}"
+							],
+							"path": [
+								"projects.xml"
+							]
+						},
+						"description": "\nGenerated from a curl request: \\ncurl -u user:bitnami -H \\\"Content-Type: text/xml\\\" -d \\\n'<project><name><![CDATA[<img src=logout/> ]]> This Project Will Log You Out</name></project>' http://192.168.1.147/projects.xml -i"
+					},
+					"response": []
+				},
+				{
+					"name": "Description is missing",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"const json = xml2Json(responseBody);\r",
+									"const id = pm.response.headers.get('text')\r",
+									"pm.collectionVariables.set(\"projectID\", id);\r",
+									"\r",
+									"pm.test(\"Status code is 201\", function () {\r",
+									"    pm.response.to.have.status(201);\r",
+									"});"
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Content-Type",
+								"value": "text/xml"
+							},
+							{
+								"key": "Authorization",
+								"value": "Basic dXNlcjpiaXRuYW1p"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "    <project>\n        <default-context-id type=\"integer\" nil=\"true\"/>\n        <default-tags>{{$randomUserName}}</default-tags>\n        <name>{{$randomFirstName}}</name>\n    </project>"
+						},
+						"url": {
+							"raw": "{{ws-tracks}}/projects.xml",
+							"host": [
+								"{{ws-tracks}}"
+							],
+							"path": [
+								"projects.xml"
+							]
+						},
+						"description": "\nGenerated from a curl request: \\ncurl -u user:bitnami -H \\\"Content-Type: text/xml\\\" -d \\\n'<project><name><![CDATA[<img src=logout/> ]]> This Project Will Log You Out</name></project>' http://192.168.1.147/projects.xml -i"
+					},
+					"response": []
+				},
+				{
+					"name": "Description 256 characters long",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"const json = xml2Json(responseBody);\r",
+									"const id = pm.response.headers.get('text')\r",
+									"pm.collectionVariables.set(\"projectID\", id);\r",
+									"\r",
+									"pm.test(\"Status code is 201\", function () {\r",
+									"    pm.response.to.have.status(201);\r",
+									"});"
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Content-Type",
+								"value": "text/xml"
+							},
+							{
+								"key": "Authorization",
+								"value": "Basic dXNlcjpiaXRuYW1p"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "    <project>\n        <default-context-id type=\"integer\" nil=\"true\"/>\n        <default-tags>{{$randomUserName}}</default-tags>\n        <description>{{$randomUUID}}0000123456789012345678901234567890123456789012345678901234567890123456789012345678901234567890123456789012345678901234567890123456789012345678901234567890123456789012345678901234567890123456789012345678901234567890123456</description>\n        <name>{{$randomFirstName}}</name>\n    </project>"
+						},
+						"url": {
+							"raw": "{{ws-tracks}}/projects.xml",
+							"host": [
+								"{{ws-tracks}}"
+							],
+							"path": [
+								"projects.xml"
+							]
+						},
+						"description": "\nGenerated from a curl request: \\ncurl -u user:bitnami -H \\\"Content-Type: text/xml\\\" -d \\\n'<project><name><![CDATA[<img src=logout/> ]]> This Project Will Log You Out</name></project>' http://192.168.1.147/projects.xml -i"
+					},
+					"response": []
+				},
+				{
+					"name": "Project already exists",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"const json = xml2Json(responseBody);\r",
+									"const id = pm.response.headers.get('text')\r",
+									"pm.collectionVariables.set(\"projectID\", id);\r",
+									"\r",
+									"pm.test(\"Status code is 409\", function () {\r",
+									"    pm.response.to.have.status(409);\r",
+									"});"
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Content-Type",
+								"value": "text/xml"
+							},
+							{
+								"key": "Authorization",
+								"value": "Basic dXNlcjpiaXRuYW1p"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "    <project>\n        <default-context-id type=\"integer\" nil=\"true\"/>\n        <default-tags>123</default-tags>\n        <description>123</description>\n        <name>123</name>\n    </project>"
+						},
+						"url": {
+							"raw": "{{ws-tracks}}/projects.xml",
+							"host": [
+								"{{ws-tracks}}"
+							],
+							"path": [
+								"projects.xml"
+							]
+						},
+						"description": "\nGenerated from a curl request: \\ncurl -u user:bitnami -H \\\"Content-Type: text/xml\\\" -d \\\n'<project><name><![CDATA[<img src=logout/> ]]> This Project Will Log You Out</name></project>' http://192.168.1.147/projects.xml -i"
+					},
+					"response": []
+				},
+				{
+					"name": "Name which includes numbers, letters, symbols",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"const json = xml2Json(responseBody);\r",
+									"const id = pm.response.headers.get('text')\r",
+									"pm.collectionVariables.set(\"projectID\", id);\r",
+									"\r",
+									"pm.test(\"Status code is 409\", function () {\r",
+									"    pm.response.to.have.status(409);\r",
+									"});"
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Content-Type",
+								"value": "text/xml"
+							},
+							{
+								"key": "Authorization",
+								"value": "Basic dXNlcjpiaXRuYW1p"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "    <project>\n        <default-context-id type=\"integer\" nil=\"true\"/>\n        <default-tags>{{$randonUserName}}</default-tags>\n        <description>{{$randomEmail}}</description>\n        <name>/*-+Hello_This.Is!@#$%^&*()_+test<>?{}|\"::\"</name>\n    </project>"
+						},
+						"url": {
+							"raw": "{{ws-tracks}}/projects.xml",
+							"host": [
+								"{{ws-tracks}}"
+							],
+							"path": [
+								"projects.xml"
+							]
+						},
+						"description": "\nGenerated from a curl request: \\ncurl -u user:bitnami -H \\\"Content-Type: text/xml\\\" -d \\\n'<project><name><![CDATA[<img src=logout/> ]]> This Project Will Log You Out</name></project>' http://192.168.1.147/projects.xml -i"
+					},
+					"response": []
+				},
+				{
+					"name": "Name which includes <b>tags</b>",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"const json = xml2Json(responseBody);\r",
+									"const id = pm.response.headers.get('text')\r",
+									"pm.collectionVariables.set(\"projectID\", id);\r",
+									"\r",
+									"pm.test(\"Status code is 201\", function () {\r",
+									"    pm.response.to.have.status(201);\r",
+									"});"
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Content-Type",
+								"value": "text/xml"
+							},
+							{
+								"key": "Authorization",
+								"value": "Basic dXNlcjpiaXRuYW1p"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "    <project>\n        <default-context-id type=\"integer\" nil=\"true\"/>\n        <default-tags>{{$randonUserName}}</default-tags>\n        <description>{{$randomEmail}}</description>\n        <name>&lt;b&gt;{{$randomFirstName}}&lt;/b&gt;</name>\n    </project>"
+						},
+						"url": {
+							"raw": "{{ws-tracks}}/projects.xml",
+							"host": [
+								"{{ws-tracks}}"
+							],
+							"path": [
+								"projects.xml"
+							]
+						},
+						"description": "\nGenerated from a curl request: \\ncurl -u user:bitnami -H \\\"Content-Type: text/xml\\\" -d \\\n'<project><name><![CDATA[<img src=logout/> ]]> This Project Will Log You Out</name></project>' http://192.168.1.147/projects.xml -i"
+					},
+					"response": []
+				},
+				{
+					"name": "Name which includes only spaces",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"const json = xml2Json(responseBody);\r",
+									"const id = pm.response.headers.get('text')\r",
+									"pm.collectionVariables.set(\"projectID\", id);\r",
+									"\r",
+									"pm.test(\"Status code is 409\", function () {\r",
+									"    pm.response.to.have.status(409);\r",
+									"});"
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Content-Type",
+								"value": "text/xml"
+							},
+							{
+								"key": "Authorization",
+								"value": "Basic dXNlcjpiaXRuYW1p"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "    <project>\n        <default-context-id type=\"integer\" nil=\"true\"/>\n        <default-tags>{{$randonUserName}}</default-tags>\n        <description>{{$randomEmail}}</description>\n        <name>     </name>\n    </project>"
+						},
+						"url": {
+							"raw": "{{ws-tracks}}/projects.xml",
+							"host": [
+								"{{ws-tracks}}"
+							],
+							"path": [
+								"projects.xml"
+							]
+						},
+						"description": "\nGenerated from a curl request: \\ncurl -u user:bitnami -H \\\"Content-Type: text/xml\\\" -d \\\n'<project><name><![CDATA[<img src=logout/> ]]> This Project Will Log You Out</name></project>' http://192.168.1.147/projects.xml -i"
+					},
+					"response": []
+				},
+				{
+					"name": "Name is empty",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"const json = xml2Json(responseBody);\r",
+									"const id = pm.response.headers.get('text')\r",
+									"pm.collectionVariables.set(\"projectID\", id);\r",
+									"\r",
+									"pm.test(\"Status code is 409\", function () {\r",
+									"    pm.response.to.have.status(409);\r",
+									"});"
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Content-Type",
+								"value": "text/xml"
+							},
+							{
+								"key": "Authorization",
+								"value": "Basic dXNlcjpiaXRuYW1p"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "    <project>\n        <default-context-id type=\"integer\" nil=\"true\"/>\n        <default-tags>{{$randonUserName}}</default-tags>\n        <description>{{$randomEmail}}</description>\n        <name></name>\n    </project>"
+						},
+						"url": {
+							"raw": "{{ws-tracks}}/projects.xml",
+							"host": [
+								"{{ws-tracks}}"
+							],
+							"path": [
+								"projects.xml"
+							]
+						},
+						"description": "\nGenerated from a curl request: \\ncurl -u user:bitnami -H \\\"Content-Type: text/xml\\\" -d \\\n'<project><name><![CDATA[<img src=logout/> ]]> This Project Will Log You Out</name></project>' http://192.168.1.147/projects.xml -i"
+					},
+					"response": []
+				},
+				{
+					"name": "Name is missing",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"const json = xml2Json(responseBody);\r",
+									"const id = pm.response.headers.get('text')\r",
+									"pm.collectionVariables.set(\"projectID\", id);\r",
+									"\r",
+									"pm.test(\"Status code is 409\", function () {\r",
+									"    pm.response.to.have.status(409);\r",
+									"});"
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Content-Type",
+								"value": "text/xml"
+							},
+							{
+								"key": "Authorization",
+								"value": "Basic dXNlcjpiaXRuYW1p"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "    <project>\n        <default-context-id type=\"integer\" nil=\"true\"/>\n        <default-tags>{{$randonUserName}}</default-tags>\n        <description>{{$randomEmail}}</description>\n    </project>"
+						},
+						"url": {
+							"raw": "{{ws-tracks}}/projects.xml",
+							"host": [
+								"{{ws-tracks}}"
+							],
+							"path": [
+								"projects.xml"
+							]
+						},
+						"description": "\nGenerated from a curl request: \\ncurl -u user:bitnami -H \\\"Content-Type: text/xml\\\" -d \\\n'<project><name><![CDATA[<img src=logout/> ]]> This Project Will Log You Out</name></project>' http://192.168.1.147/projects.xml -i"
+					},
+					"response": []
+				},
+				{
+					"name": "Name 255 characters long",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"const json = xml2Json(responseBody);\r",
+									"const id = pm.response.headers.get('text')\r",
+									"pm.collectionVariables.set(\"projectID\", id);\r",
+									"\r",
+									"pm.test(\"Status code is 201\", function () {\r",
+									"    pm.response.to.have.status(201);\r",
+									"});"
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Content-Type",
+								"value": "text/xml"
+							},
+							{
+								"key": "Authorization",
+								"value": "Basic dXNlcjpiaXRuYW1p"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "    <project>\n        <default-context-id type=\"integer\" nil=\"true\"/>\n        <default-tags>{{$randonUserName}}</default-tags>\n        <description>{{$randomEmail}}</description>\n        <name>{{$randomUUID}}000012345678901234567890123456789012345678901234567890123456789012345678901234567890123456789012345678901234567890123456789012345678901234567890123456789012345678901234567890123456789012345678901234567890123456789012345</name>\n    </project>"
+						},
+						"url": {
+							"raw": "{{ws-tracks}}/projects.xml",
+							"host": [
+								"{{ws-tracks}}"
+							],
+							"path": [
+								"projects.xml"
+							]
+						},
+						"description": "\nGenerated from a curl request: \\ncurl -u user:bitnami -H \\\"Content-Type: text/xml\\\" -d \\\n'<project><name><![CDATA[<img src=logout/> ]]> This Project Will Log You Out</name></project>' http://192.168.1.147/projects.xml -i"
+					},
+					"response": []
+				},
+				{
+					"name": "Name 256 characters long",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"const json = xml2Json(responseBody);\r",
+									"const id = pm.response.headers.get('text')\r",
+									"pm.collectionVariables.set(\"projectID\", id);\r",
+									"\r",
+									"pm.test(\"Status code is 201\", function () {\r",
+									"    pm.response.to.have.status(201);\r",
+									"});"
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Content-Type",
+								"value": "text/xml"
+							},
+							{
+								"key": "Authorization",
+								"value": "Basic dXNlcjpiaXRuYW1p"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "    <project>\n        <default-context-id type=\"integer\" nil=\"true\"/>\n        <default-tags>{{$randonUserName}}</default-tags>\n        <description>{{$randomEmail}}</description>\n        <name>{{$randomUUID}}0000123456789012345678901234567890123456789012345678901234567890123456789012345678901234567890123456789012345678901234567890123456789012345678901234567890123456789012345678901234567890123456789012345678901234567890123456</name>\n    </project>"
+						},
+						"url": {
+							"raw": "{{ws-tracks}}/projects.xml",
+							"host": [
+								"{{ws-tracks}}"
+							],
+							"path": [
+								"projects.xml"
+							]
+						},
+						"description": "\nGenerated from a curl request: \\ncurl -u user:bitnami -H \\\"Content-Type: text/xml\\\" -d \\\n'<project><name><![CDATA[<img src=logout/> ]]> This Project Will Log You Out</name></project>' http://192.168.1.147/projects.xml -i"
+					},
+					"response": []
+				},
+				{
+					"name": "Name 257 characters long",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"const json = xml2Json(responseBody);\r",
+									"const id = pm.response.headers.get('text')\r",
+									"pm.collectionVariables.set(\"projectID\", id);\r",
+									"\r",
+									"pm.test(\"Status code is 409\", function () {\r",
+									"    pm.response.to.have.status(409);\r",
+									"});"
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Content-Type",
+								"value": "text/xml"
+							},
+							{
+								"key": "Authorization",
+								"value": "Basic dXNlcjpiaXRuYW1p"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "    <project>\n        <default-context-id type=\"integer\" nil=\"true\"/>\n        <default-tags>{{$randonUserName}}</default-tags>\n        <description>{{$randomEmail}}</description>\n        <name>{{$randomUUID}}00001234567890123456789012345678901234567890123456789012345678901234567890123456789012345678901234567890123456789012345678901234567890123456789012345678901234567890123456789012345678901234567890123456789012345678901234567</name>\n    </project>"
+						},
+						"url": {
+							"raw": "{{ws-tracks}}/projects.xml",
+							"host": [
+								"{{ws-tracks}}"
+							],
+							"path": [
+								"projects.xml"
+							]
+						},
+						"description": "\nGenerated from a curl request: \\ncurl -u user:bitnami -H \\\"Content-Type: text/xml\\\" -d \\\n'<project><name><![CDATA[<img src=logout/> ]]> This Project Will Log You Out</name></project>' http://192.168.1.147/projects.xml -i"
+					},
+					"response": []
+				},
+				{
+					"name": "default-context-id type = string",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"const json = xml2Json(responseBody);\r",
+									"const id = pm.response.headers.get('text')\r",
+									"pm.collectionVariables.set(\"projectID\", id);\r",
+									"\r",
+									"pm.test(\"Status code is 201\", function () {\r",
+									"    pm.response.to.have.status(201);\r",
+									"});"
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Content-Type",
+								"value": "text/xml"
+							},
+							{
+								"key": "Authorization",
+								"value": "Basic dXNlcjpiaXRuYW1p"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "    <project>\n        <default-context-id type=\"string\" nil=\"true\"/>\n        <default-tags>{{$randonUserName}}</default-tags>\n        <description>{{$randomEmail}}</description>\n        <name>{{$randomFirstName}}</name>\n    </project>"
+						},
+						"url": {
+							"raw": "{{ws-tracks}}/projects.xml",
+							"host": [
+								"{{ws-tracks}}"
+							],
+							"path": [
+								"projects.xml"
+							]
+						},
+						"description": "\nGenerated from a curl request: \\ncurl -u user:bitnami -H \\\"Content-Type: text/xml\\\" -d \\\n'<project><name><![CDATA[<img src=logout/> ]]> This Project Will Log You Out</name></project>' http://192.168.1.147/projects.xml -i"
+					},
+					"response": []
+				},
+				{
+					"name": "default-context-id type = boolean",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"const json = xml2Json(responseBody);\r",
+									"const id = pm.response.headers.get('text')\r",
+									"pm.collectionVariables.set(\"projectID\", id);\r",
+									"\r",
+									"pm.test(\"Status code is 201\", function () {\r",
+									"    pm.response.to.have.status(201);\r",
+									"});"
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Content-Type",
+								"value": "text/xml"
+							},
+							{
+								"key": "Authorization",
+								"value": "Basic dXNlcjpiaXRuYW1p"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "    <project>\n        <default-context-id type=\"boolean\" nil=\"true\"/>\n        <default-tags>{{$randonUserName}}</default-tags>\n        <description>{{$randomEmail}}</description>\n        <name>{{$randomFirstName}}</name>\n    </project>"
+						},
+						"url": {
+							"raw": "{{ws-tracks}}/projects.xml",
+							"host": [
+								"{{ws-tracks}}"
+							],
+							"path": [
+								"projects.xml"
+							]
+						},
+						"description": "\nGenerated from a curl request: \\ncurl -u user:bitnami -H \\\"Content-Type: text/xml\\\" -d \\\n'<project><name><![CDATA[<img src=logout/> ]]> This Project Will Log You Out</name></project>' http://192.168.1.147/projects.xml -i"
+					},
+					"response": []
+				},
+				{
+					"name": "default-context-id nil = false",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"const json = xml2Json(responseBody);\r",
+									"const id = pm.response.headers.get('text')\r",
+									"pm.collectionVariables.set(\"projectID\", id);\r",
+									"\r",
+									"pm.test(\"Status code is 201\", function () {\r",
+									"    pm.response.to.have.status(201);\r",
+									"});"
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Content-Type",
+								"value": "text/xml"
+							},
+							{
+								"key": "Authorization",
+								"value": "Basic dXNlcjpiaXRuYW1p"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "    <project>\n        <default-context-id type=\"integer\" nil=\"false\"/>\n        <default-tags>{{$randonUserName}}</default-tags>\n        <description>{{$randomEmail}}</description>\n        <name>{{$randomFirstName}}</name>\n    </project>"
+						},
+						"url": {
+							"raw": "{{ws-tracks}}/projects.xml",
+							"host": [
+								"{{ws-tracks}}"
+							],
+							"path": [
+								"projects.xml"
+							]
+						},
+						"description": "\nGenerated from a curl request: \\ncurl -u user:bitnami -H \\\"Content-Type: text/xml\\\" -d \\\n'<project><name><![CDATA[<img src=logout/> ]]> This Project Will Log You Out</name></project>' http://192.168.1.147/projects.xml -i"
+					},
+					"response": []
+				},
+				{
+					"name": "default-context-id is empty",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"const json = xml2Json(responseBody);\r",
+									"const id = pm.response.headers.get('text')\r",
+									"pm.collectionVariables.set(\"projectID\", id);\r",
+									"\r",
+									"pm.test(\"Status code is 201\", function () {\r",
+									"    pm.response.to.have.status(201);\r",
+									"});"
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Content-Type",
+								"value": "text/xml"
+							},
+							{
+								"key": "Authorization",
+								"value": "Basic dXNlcjpiaXRuYW1p"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "    <project>\n        <default-context-id type=\"\" nil=\"\"/>\n        <default-tags>{{$randonUserName}}</default-tags>\n        <description>{{$randomEmail}}</description>\n        <name>{{$randomFirstName}}</name>\n    </project>"
+						},
+						"url": {
+							"raw": "{{ws-tracks}}/projects.xml",
+							"host": [
+								"{{ws-tracks}}"
+							],
+							"path": [
+								"projects.xml"
+							]
+						},
+						"description": "\nGenerated from a curl request: \\ncurl -u user:bitnami -H \\\"Content-Type: text/xml\\\" -d \\\n'<project><name><![CDATA[<img src=logout/> ]]> This Project Will Log You Out</name></project>' http://192.168.1.147/projects.xml -i"
+					},
+					"response": []
+				},
+				{
+					"name": "default-context-id is missing",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"const json = xml2Json(responseBody);\r",
+									"const id = pm.response.headers.get('text')\r",
+									"pm.collectionVariables.set(\"projectID\", id);\r",
+									"\r",
+									"pm.test(\"Status code is 201\", function () {\r",
+									"    pm.response.to.have.status(201);\r",
+									"});"
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Content-Type",
+								"value": "text/xml"
+							},
+							{
+								"key": "Authorization",
+								"value": "Basic dXNlcjpiaXRuYW1p"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "    <project>\n        <default-tags>{{$randonUserName}}</default-tags>\n        <description>{{$randomEmail}}</description>\n        <name>{{$randomFirstName}}</name>\n    </project>"
+						},
+						"url": {
+							"raw": "{{ws-tracks}}/projects.xml",
+							"host": [
+								"{{ws-tracks}}"
+							],
+							"path": [
+								"projects.xml"
+							]
+						},
+						"description": "\nGenerated from a curl request: \\ncurl -u user:bitnami -H \\\"Content-Type: text/xml\\\" -d \\\n'<project><name><![CDATA[<img src=logout/> ]]> This Project Will Log You Out</name></project>' http://192.168.1.147/projects.xml -i"
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "List Projects",
+			"item": [
+				{
+					"name": "List Projects",
+					"request": {
+						"method": "GET",
+						"header": [
+							{
+								"key": "Content-Type",
+								"value": "text/xml"
+							},
+							{
+								"key": "Authorization",
+								"value": "Basic dXNlcjpiaXRuYW1p"
+							}
+						],
+						"url": {
+							"raw": "{{ws-tracks}}/projects/{{projectID}}.xml",
+							"host": [
+								"{{ws-tracks}}"
+							],
+							"path": [
+								"projects",
+								"{{projectID}}.xml"
+							]
+						},
+						"description": "Get projects.xml"
+					},
+					"response": []
+				},
+				{
+					"name": "List Projects No Auth",
+					"event": [
+						{
+							"listen": "prerequest",
+							"script": {
+								"exec": [
+									"const jar = pm.cookies.jar();\r",
+									"\r",
+									"pm.request.url.host = [pm.environment.get(\"ws-tracks\")];\r",
+									"jar.clear(pm.request.url, (error) => {\r",
+									"    if (error)\r",
+									"        console.error(error);\r",
+									"});\r",
+									"\r",
+									"//Скрипт на автоматическую очистку кук все равно не работает :("
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"auth": {
+							"type": "noauth"
+						},
+						"method": "GET",
+						"header": [
+							{
+								"key": "Content-Type",
+								"value": "text/xml"
+							},
+							{
+								"key": "Authorization",
+								"value": "Basic dXNlcjpiaXRuYW1p"
+							}
+						],
+						"url": {
+							"raw": "{{ws-tracks}}/projects/{{projectID}}.xml",
+							"host": [
+								"{{ws-tracks}}"
+							],
+							"path": [
+								"projects",
+								"{{projectID}}.xml"
+							]
+						},
+						"description": "Get projects.xml"
+					},
+					"response": []
+				},
+				{
+					"name": "List Projects Which doesn't exist",
+					"event": [
+						{
+							"listen": "prerequest",
+							"script": {
+								"exec": [
+									"const jar = pm.cookies.jar();\r",
+									"\r",
+									"pm.request.url.host = [pm.environment.get(\"ws-tracks\")];\r",
+									"jar.clear(pm.request.url, (error) => {\r",
+									"    if (error)\r",
+									"        console.error(error);\r",
+									"});\r",
+									"\r",
+									"//Скрипт на автоматическую очистку кук все равно не работает :("
+								],
+								"type": "text/javascript"
+							}
+						},
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"var jsonObject = xml2Json(responseBody);\r",
+									"\r",
+									"pm.test(\"Status code is 404\", function () {\r",
+									"    pm.response.to.have.status(404);\r",
+									"});"
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"method": "GET",
+						"header": [
+							{
+								"key": "Content-Type",
+								"value": "text/xml"
+							},
+							{
+								"key": "Authorization",
+								"value": "Basic dXNlcjpiaXRuYW1p"
+							}
+						],
+						"url": {
+							"raw": "{{ws-tracks}}/projects/9999999.xml",
+							"host": [
+								"{{ws-tracks}}"
+							],
+							"path": [
+								"projects",
+								"9999999.xml"
+							]
+						},
+						"description": "Get projects.xml"
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "Amend Project",
+			"item": [
+				{
+					"name": "Random Values",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"var jsonObject = xml2Json(responseBody);\r",
+									"\r",
+									"pm.test(\"Status code is 200\", function () {\r",
+									"    pm.response.to.have.status(200);\r",
+									"});"
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"method": "PUT",
+						"header": [
+							{
+								"key": "Content-Type",
+								"value": "text/xml"
+							},
+							{
+								"key": "Authorization",
+								"value": "Basic dXNlcjpiaXRuYW1p"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "    <project>\n        <default-context-id type=\"integer\" nil=\"true\"/>\n        <default-tags>{{$randomUserName}}</default-tags>\n        <description>{{$randomEmail}}</description>\n        <name>{{$randomFirstName}}</name>\n        <state>active</state>\n    </project>"
+						},
+						"url": {
+							"raw": "{{ws-tracks}}/projects/{{projectID}}.xml",
+							"host": [
+								"{{ws-tracks}}"
+							],
+							"path": [
+								"projects",
+								"{{projectID}}.xml"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Random Values No Auth",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"var jsonObject = xml2Json(responseBody);\r",
+									"\r",
+									"pm.test(\"Status code is 200\", function () {\r",
+									"    pm.response.to.have.status(200);\r",
+									"});"
+								],
+								"type": "text/javascript"
+							}
+						},
+						{
+							"listen": "prerequest",
+							"script": {
+								"exec": [
+									"const jar = pm.cookies.jar();\r",
+									"\r",
+									"pm.request.url.host = [pm.environment.get(\"ws-tracks\")];\r",
+									"jar.clear(pm.request.url, (error) => {\r",
+									"    if (error)\r",
+									"        console.error(error);\r",
+									"});\r",
+									"\r",
+									"//Скрипт на автоматическую очистку кук все равно не работает :("
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"auth": {
+							"type": "noauth"
+						},
+						"method": "PUT",
+						"header": [
+							{
+								"key": "Content-Type",
+								"value": "text/xml"
+							},
+							{
+								"key": "Authorization",
+								"value": "Basic dXNlcjpiaXRuYW1p"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "    <project>\n        <default-context-id type=\"integer\" nil=\"true\"/>\n        <default-tags>{{$randomUserName}}</default-tags>\n        <description>{{$randomEmail}}</description>\n        <name>{{$randomFirstName}}</name>\n        <state>active</state>\n    </project>"
+						},
+						"url": {
+							"raw": "{{ws-tracks}}/projects/{{projectID}}.xml",
+							"host": [
+								"{{ws-tracks}}"
+							],
+							"path": [
+								"projects",
+								"{{projectID}}.xml"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Wrong order of fields",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"var jsonObject = xml2Json(responseBody);\r",
+									"\r",
+									"pm.test(\"Status code is 200\", function () {\r",
+									"    pm.response.to.have.status(200);\r",
+									"});"
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"method": "PUT",
+						"header": [
+							{
+								"key": "Content-Type",
+								"value": "text/xml"
+							},
+							{
+								"key": "Authorization",
+								"value": "Basic dXNlcjpiaXRuYW1p"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "    <project>\n        <state>active</state>\n        <default-tags>{{$randomUserName}}</default-tags>\n        <description>{{$randomEmail}}</description>\n        <name>{{$randomFirstName}}</name>\n        <default-context-id type=\"integer\" nil=\"true\"/>\n    </project>"
+						},
+						"url": {
+							"raw": "{{ws-tracks}}/projects/{{projectID}}.xml",
+							"host": [
+								"{{ws-tracks}}"
+							],
+							"path": [
+								"projects",
+								"{{projectID}}.xml"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Duplicated Fields",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"var jsonObject = xml2Json(responseBody);\r",
+									"\r",
+									"pm.test(\"Status code is 409\", function () {\r",
+									"    pm.response.to.have.status(409);\r",
+									"});"
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"method": "PUT",
+						"header": [
+							{
+								"key": "Content-Type",
+								"value": "text/xml"
+							},
+							{
+								"key": "Authorization",
+								"value": "Basic dXNlcjpiaXRuYW1p"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "    <project>\n        <default-context-id type=\"integer\" nil=\"true\"/>\n        <default-context-id type=\"integer\" nil=\"true\"/>\n        <default-tags>{{$randomUserName}}</default-tags>\n        <default-tags>{{$randomUserName}}</default-tags>\n        <description>{{$randomEmail}}</description>\n        <description>{{$randomEmail}}</description>\n        <name>{{$randomFirstName}}</name>\n        <name>{{$randomFirstName}}</name>\n        <state>active</state>\n        <state>active</state>\n    </project>"
+						},
+						"url": {
+							"raw": "{{ws-tracks}}/projects/{{projectID}}.xml",
+							"host": [
+								"{{ws-tracks}}"
+							],
+							"path": [
+								"projects",
+								"{{projectID}}.xml"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Non Existant fields",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"var jsonObject = xml2Json(responseBody);\r",
+									"\r",
+									"pm.test(\"Status code is 200\", function () {\r",
+									"    pm.response.to.have.status(200);\r",
+									"});"
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"method": "PUT",
+						"header": [
+							{
+								"key": "Content-Type",
+								"value": "text/xml"
+							},
+							{
+								"key": "Authorization",
+								"value": "Basic dXNlcjpiaXRuYW1p"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "    <project>\n        <default-context-id type=\"integer\" nil=\"true\"/>\n        <default-tags>{{$randomUserName}}</default-tags>\n        <description>{{$randomEmail}}</description>\n        <name>{{$randomFirstName}}</name>\n        <state>active</state>\n        <age>26</age>\n    </project>"
+						},
+						"url": {
+							"raw": "{{ws-tracks}}/projects/{{projectID}}.xml",
+							"host": [
+								"{{ws-tracks}}"
+							],
+							"path": [
+								"projects",
+								"{{projectID}}.xml"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Tags which includes numbers, letters, symbols",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"var jsonObject = xml2Json(responseBody);\r",
+									"\r",
+									"pm.test(\"Status code is 200\", function () {\r",
+									"    pm.response.to.have.status(200);\r",
+									"});"
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"method": "PUT",
+						"header": [
+							{
+								"key": "Content-Type",
+								"value": "text/xml"
+							},
+							{
+								"key": "Authorization",
+								"value": "Basic dXNlcjpiaXRuYW1p"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "    <project>\n        <default-context-id type=\"integer\" nil=\"true\"/>\n        <default-tags>/*-+Hello_This.Is!@#$%^&*()_+test<>?{}|\"::\"</default-tags>\n        <description>{{$randomEmail}}</description>\n        <name>{{$randomFirstName}}</name>\n        <state>active</state>\n    </project>"
+						},
+						"url": {
+							"raw": "{{ws-tracks}}/projects/{{projectID}}.xml",
+							"host": [
+								"{{ws-tracks}}"
+							],
+							"path": [
+								"projects",
+								"{{projectID}}.xml"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Tags which includes <b>tags</b>",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"var jsonObject = xml2Json(responseBody);\r",
+									"\r",
+									"pm.test(\"Status code is 200\", function () {\r",
+									"    pm.response.to.have.status(200);\r",
+									"});"
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"method": "PUT",
+						"header": [
+							{
+								"key": "Content-Type",
+								"value": "text/xml"
+							},
+							{
+								"key": "Authorization",
+								"value": "Basic dXNlcjpiaXRuYW1p"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "    <project>\n        <default-context-id type=\"integer\" nil=\"true\"/>\n        <default-tags>&lt;b&gt;{{$randomUserName}}&lt;/b&gt;</default-tags>\n        <description>{{$randomEmail}}</description>\n        <name>{{$randomFirstName}}</name>\n        <state>active</state>\n    </project>"
+						},
+						"url": {
+							"raw": "{{ws-tracks}}/projects/{{projectID}}.xml",
+							"host": [
+								"{{ws-tracks}}"
+							],
+							"path": [
+								"projects",
+								"{{projectID}}.xml"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Tags which includes only spaces",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"var jsonObject = xml2Json(responseBody);\r",
+									"\r",
+									"pm.test(\"Status code is 200\", function () {\r",
+									"    pm.response.to.have.status(200);\r",
+									"});"
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"method": "PUT",
+						"header": [
+							{
+								"key": "Content-Type",
+								"value": "text/xml"
+							},
+							{
+								"key": "Authorization",
+								"value": "Basic dXNlcjpiaXRuYW1p"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "    <project>\n        <default-context-id type=\"integer\" nil=\"true\"/>\n        <default-tags>     </default-tags>\n        <description>{{$randomEmail}}</description>\n        <name>{{$randomFirstName}}</name>\n        <state>active</state>\n    </project>"
+						},
+						"url": {
+							"raw": "{{ws-tracks}}/projects/{{projectID}}.xml",
+							"host": [
+								"{{ws-tracks}}"
+							],
+							"path": [
+								"projects",
+								"{{projectID}}.xml"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Tags is empty",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"var jsonObject = xml2Json(responseBody);\r",
+									"\r",
+									"pm.test(\"Status code is 200\", function () {\r",
+									"    pm.response.to.have.status(200);\r",
+									"});"
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"method": "PUT",
+						"header": [
+							{
+								"key": "Content-Type",
+								"value": "text/xml"
+							},
+							{
+								"key": "Authorization",
+								"value": "Basic dXNlcjpiaXRuYW1p"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "    <project>\n        <default-context-id type=\"integer\" nil=\"true\"/>\n        <default-tags></default-tags>\n        <description>{{$randomEmail}}</description>\n        <name>{{$randomFirstName}}</name>\n        <state>active</state>\n    </project>"
+						},
+						"url": {
+							"raw": "{{ws-tracks}}/projects/{{projectID}}.xml",
+							"host": [
+								"{{ws-tracks}}"
+							],
+							"path": [
+								"projects",
+								"{{projectID}}.xml"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Tags is missing",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"var jsonObject = xml2Json(responseBody);\r",
+									"\r",
+									"pm.test(\"Status code is 200\", function () {\r",
+									"    pm.response.to.have.status(200);\r",
+									"});"
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"method": "PUT",
+						"header": [
+							{
+								"key": "Content-Type",
+								"value": "text/xml"
+							},
+							{
+								"key": "Authorization",
+								"value": "Basic dXNlcjpiaXRuYW1p"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "    <project>\n        <default-context-id type=\"integer\" nil=\"true\"/>\n        <description>{{$randomEmail}}</description>\n        <name>{{$randomFirstName}}</name>\n        <state>active</state>\n    </project>"
+						},
+						"url": {
+							"raw": "{{ws-tracks}}/projects/{{projectID}}.xml",
+							"host": [
+								"{{ws-tracks}}"
+							],
+							"path": [
+								"projects",
+								"{{projectID}}.xml"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Tags 255 characters long",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"var jsonObject = xml2Json(responseBody);\r",
+									"\r",
+									"pm.test(\"Status code is 200\", function () {\r",
+									"    pm.response.to.have.status(200);\r",
+									"});"
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"method": "PUT",
+						"header": [
+							{
+								"key": "Content-Type",
+								"value": "text/xml"
+							},
+							{
+								"key": "Authorization",
+								"value": "Basic dXNlcjpiaXRuYW1p"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "    <project>\n        <default-context-id type=\"integer\" nil=\"true\"/>\n        <default-tags>{{$randomUUID}}000012345678901234567890123456789012345678901234567890123456789012345678901234567890123456789012345678901234567890123456789012345678901234567890123456789012345678901234567890123456789012345678901234567890123456789012345</default-tags>\n        <description>{{$randomEmail}}</description>\n        <name>{{$randomFirstName}}</name>\n        <state>active</state>\n    </project>"
+						},
+						"url": {
+							"raw": "{{ws-tracks}}/projects/{{projectID}}.xml",
+							"host": [
+								"{{ws-tracks}}"
+							],
+							"path": [
+								"projects",
+								"{{projectID}}.xml"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Tags 256 characters long Copy",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"var jsonObject = xml2Json(responseBody);\r",
+									"\r",
+									"pm.test(\"Status code is 200\", function () {\r",
+									"    pm.response.to.have.status(200);\r",
+									"});"
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"method": "PUT",
+						"header": [
+							{
+								"key": "Content-Type",
+								"value": "text/xml"
+							},
+							{
+								"key": "Authorization",
+								"value": "Basic dXNlcjpiaXRuYW1p"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "    <project>\n        <default-context-id type=\"integer\" nil=\"true\"/>\n        <default-tags>{{$randomUUID}}0000123456789012345678901234567890123456789012345678901234567890123456789012345678901234567890123456789012345678901234567890123456789012345678901234567890123456789012345678901234567890123456789012345678901234567890123456</default-tags>\n        <description>{{$randomEmail}}</description>\n        <name>{{$randomFirstName}}</name>\n        <state>active</state>\n    </project>"
+						},
+						"url": {
+							"raw": "{{ws-tracks}}/projects/{{projectID}}.xml",
+							"host": [
+								"{{ws-tracks}}"
+							],
+							"path": [
+								"projects",
+								"{{projectID}}.xml"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Tags 257 characters long",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"var jsonObject = xml2Json(responseBody);\r",
+									"\r",
+									"pm.test(\"Status code is 200\", function () {\r",
+									"    pm.response.to.have.status(200);\r",
+									"});"
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"method": "PUT",
+						"header": [
+							{
+								"key": "Content-Type",
+								"value": "text/xml"
+							},
+							{
+								"key": "Authorization",
+								"value": "Basic dXNlcjpiaXRuYW1p"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "    <project>\n        <default-context-id type=\"integer\" nil=\"true\"/>\n        <default-tags>{{$randomUUID}}00001234567890123456789012345678901234567890123456789012345678901234567890123456789012345678901234567890123456789012345678901234567890123456789012345678901234567890123456789012345678901234567890123456789012345678901234567</default-tags>\n        <description>{{$randomEmail}}</description>\n        <name>{{$randomFirstName}}</name>\n        <state>active</state>\n    </project>"
+						},
+						"url": {
+							"raw": "{{ws-tracks}}/projects/{{projectID}}.xml",
+							"host": [
+								"{{ws-tracks}}"
+							],
+							"path": [
+								"projects",
+								"{{projectID}}.xml"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Description which includes numbers, letters, symbols",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"var jsonObject = xml2Json(responseBody);\r",
+									"\r",
+									"pm.test(\"Status code is 200\", function () {\r",
+									"    pm.response.to.have.status(200);\r",
+									"});"
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"method": "PUT",
+						"header": [
+							{
+								"key": "Content-Type",
+								"value": "text/xml"
+							},
+							{
+								"key": "Authorization",
+								"value": "Basic dXNlcjpiaXRuYW1p"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "    <project>\n        <default-context-id type=\"integer\" nil=\"true\"/>\n        <default-tags>{{$randomUserName}}</default-tags>\n        <description>/*-+Hello_This.Is!@#$%^&*()_+test<>?{}|\"::\"</description>\n        <name>{{$randomFirstName}}</name>\n        <state>active</state>\n    </project>"
+						},
+						"url": {
+							"raw": "{{ws-tracks}}/projects/{{projectID}}.xml",
+							"host": [
+								"{{ws-tracks}}"
+							],
+							"path": [
+								"projects",
+								"{{projectID}}.xml"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Description which includes <b>tags</b>",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"var jsonObject = xml2Json(responseBody);\r",
+									"\r",
+									"pm.test(\"Status code is 200\", function () {\r",
+									"    pm.response.to.have.status(200);\r",
+									"});"
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"method": "PUT",
+						"header": [
+							{
+								"key": "Content-Type",
+								"value": "text/xml"
+							},
+							{
+								"key": "Authorization",
+								"value": "Basic dXNlcjpiaXRuYW1p"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "    <project>\n        <default-context-id type=\"integer\" nil=\"true\"/>\n        <default-tags>{{$randomUserName}}</default-tags>\n        <description>&lt;b&gt;{{$randomUserName}}&lt;/b&gt;</description>\n        <name>{{$randomFirstName}}</name>\n        <state>active</state>\n    </project>"
+						},
+						"url": {
+							"raw": "{{ws-tracks}}/projects/{{projectID}}.xml",
+							"host": [
+								"{{ws-tracks}}"
+							],
+							"path": [
+								"projects",
+								"{{projectID}}.xml"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Description which includes only spaces",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"var jsonObject = xml2Json(responseBody);\r",
+									"\r",
+									"pm.test(\"Status code is 200\", function () {\r",
+									"    pm.response.to.have.status(200);\r",
+									"});"
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"method": "PUT",
+						"header": [
+							{
+								"key": "Content-Type",
+								"value": "text/xml"
+							},
+							{
+								"key": "Authorization",
+								"value": "Basic dXNlcjpiaXRuYW1p"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "    <project>\n        <default-context-id type=\"integer\" nil=\"true\"/>\n        <default-tags>{{$randomUserName}}</default-tags>\n        <description>     </description>\n        <name>{{$randomFirstName}}</name>\n        <state>active</state>\n    </project>"
+						},
+						"url": {
+							"raw": "{{ws-tracks}}/projects/{{projectID}}.xml",
+							"host": [
+								"{{ws-tracks}}"
+							],
+							"path": [
+								"projects",
+								"{{projectID}}.xml"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Description is empty",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"var jsonObject = xml2Json(responseBody);\r",
+									"\r",
+									"pm.test(\"Status code is 200\", function () {\r",
+									"    pm.response.to.have.status(200);\r",
+									"});"
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"method": "PUT",
+						"header": [
+							{
+								"key": "Content-Type",
+								"value": "text/xml"
+							},
+							{
+								"key": "Authorization",
+								"value": "Basic dXNlcjpiaXRuYW1p"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "    <project>\n        <default-context-id type=\"integer\" nil=\"true\"/>\n        <default-tags>{{$randomUserName}}</default-tags>\n        <description></description>\n        <name>{{$randomFirstName}}</name>\n        <state>active</state>\n    </project>"
+						},
+						"url": {
+							"raw": "{{ws-tracks}}/projects/{{projectID}}.xml",
+							"host": [
+								"{{ws-tracks}}"
+							],
+							"path": [
+								"projects",
+								"{{projectID}}.xml"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Description missing",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"var jsonObject = xml2Json(responseBody);\r",
+									"\r",
+									"pm.test(\"Status code is 200\", function () {\r",
+									"    pm.response.to.have.status(200);\r",
+									"});"
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"method": "PUT",
+						"header": [
+							{
+								"key": "Content-Type",
+								"value": "text/xml"
+							},
+							{
+								"key": "Authorization",
+								"value": "Basic dXNlcjpiaXRuYW1p"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "    <project>\n        <default-context-id type=\"integer\" nil=\"true\"/>\n        <default-tags>{{$randomUserName}}</default-tags>\n        <name>{{$randomFirstName}}</name>\n        <state>active</state>\n    </project>"
+						},
+						"url": {
+							"raw": "{{ws-tracks}}/projects/{{projectID}}.xml",
+							"host": [
+								"{{ws-tracks}}"
+							],
+							"path": [
+								"projects",
+								"{{projectID}}.xml"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Description 256 characters long",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"var jsonObject = xml2Json(responseBody);\r",
+									"\r",
+									"pm.test(\"Status code is 200\", function () {\r",
+									"    pm.response.to.have.status(200);\r",
+									"});"
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"method": "PUT",
+						"header": [
+							{
+								"key": "Content-Type",
+								"value": "text/xml"
+							},
+							{
+								"key": "Authorization",
+								"value": "Basic dXNlcjpiaXRuYW1p"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "    <project>\n        <default-context-id type=\"integer\" nil=\"true\"/>\n        <default-tags>{{$randomUserName}}</default-tags>\n        <description>{{$randomUUID}}0000123456789012345678901234567890123456789012345678901234567890123456789012345678901234567890123456789012345678901234567890123456789012345678901234567890123456789012345678901234567890123456789012345678901234567890123456</description>\n        <name>{{$randomFirstName}}</name>\n        <state>active</state>\n    </project>"
+						},
+						"url": {
+							"raw": "{{ws-tracks}}/projects/{{projectID}}.xml",
+							"host": [
+								"{{ws-tracks}}"
+							],
+							"path": [
+								"projects",
+								"{{projectID}}.xml"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Project doesn't Exist",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"var jsonObject = xml2Json(responseBody);\r",
+									"\r",
+									"pm.test(\"Status code is 404\", function () {\r",
+									"    pm.response.to.have.status(404);\r",
+									"});"
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"method": "PUT",
+						"header": [
+							{
+								"key": "Content-Type",
+								"value": "text/xml"
+							},
+							{
+								"key": "Authorization",
+								"value": "Basic dXNlcjpiaXRuYW1p"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "    <project>\n        <default-context-id type=\"integer\" nil=\"true\"/>\n        <default-tags>{{$randomUserName}}</default-tags>\n        <description>{{$randomEmail}}</description>\n        <name>{{$randomFirstName}}</name>\n        <state>active</state>\n    </project>"
+						},
+						"url": {
+							"raw": "{{ws-tracks}}/projects/9999999.xml",
+							"host": [
+								"{{ws-tracks}}"
+							],
+							"path": [
+								"projects",
+								"9999999.xml"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Name Which includes numbers, letters, symbols",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"var jsonObject = xml2Json(responseBody);\r",
+									"\r",
+									"pm.test(\"Status code is 200\", function () {\r",
+									"    pm.response.to.have.status(200);\r",
+									"});"
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"method": "PUT",
+						"header": [
+							{
+								"key": "Content-Type",
+								"value": "text/xml"
+							},
+							{
+								"key": "Authorization",
+								"value": "Basic dXNlcjpiaXRuYW1p"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "    <project>\n        <default-context-id type=\"integer\" nil=\"true\"/>\n        <default-tags>{{$randomUserName}}</default-tags>\n        <description>{{$randomEmail}}</description>\n        <name>/*-+Hello_This.Is!@#$%^&*()_+test<>?{}|\"::\"</name>\n        <state>active</state>\n    </project>"
+						},
+						"url": {
+							"raw": "{{ws-tracks}}/projects/{{projectID}}.xml",
+							"host": [
+								"{{ws-tracks}}"
+							],
+							"path": [
+								"projects",
+								"{{projectID}}.xml"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Name Which includes <b>tags</b>",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"var jsonObject = xml2Json(responseBody);\r",
+									"\r",
+									"pm.test(\"Status code is 200\", function () {\r",
+									"    pm.response.to.have.status(200);\r",
+									"});"
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"method": "PUT",
+						"header": [
+							{
+								"key": "Content-Type",
+								"value": "text/xml"
+							},
+							{
+								"key": "Authorization",
+								"value": "Basic dXNlcjpiaXRuYW1p"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "    <project>\n        <default-context-id type=\"integer\" nil=\"true\"/>\n        <default-tags>{{$randomUserName}}</default-tags>\n        <description>{{$randomEmail}}</description>\n        <name>&lt;b&gt;{{$randomUserName}}&lt;/b&gt;</name>\n        <state>active</state>\n    </project>"
+						},
+						"url": {
+							"raw": "{{ws-tracks}}/projects/{{projectID}}.xml",
+							"host": [
+								"{{ws-tracks}}"
+							],
+							"path": [
+								"projects",
+								"{{projectID}}.xml"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Name which includes only spaces",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"var jsonObject = xml2Json(responseBody);\r",
+									"\r",
+									"pm.test(\"Status code is 200\", function () {\r",
+									"    pm.response.to.have.status(200);\r",
+									"});"
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"method": "PUT",
+						"header": [
+							{
+								"key": "Content-Type",
+								"value": "text/xml"
+							},
+							{
+								"key": "Authorization",
+								"value": "Basic dXNlcjpiaXRuYW1p"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "    <project>\n        <default-context-id type=\"integer\" nil=\"true\"/>\n        <default-tags>{{$randomUserName}}</default-tags>\n        <description>{{$randomEmail}}</description>\n        <name>     </name>\n        <state>active</state>\n    </project>"
+						},
+						"url": {
+							"raw": "{{ws-tracks}}/projects/{{projectID}}.xml",
+							"host": [
+								"{{ws-tracks}}"
+							],
+							"path": [
+								"projects",
+								"{{projectID}}.xml"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Name is empty",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"var jsonObject = xml2Json(responseBody);\r",
+									"\r",
+									"pm.test(\"Status code is 409\", function () {\r",
+									"    pm.response.to.have.status(409);\r",
+									"});"
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"method": "PUT",
+						"header": [
+							{
+								"key": "Content-Type",
+								"value": "text/xml"
+							},
+							{
+								"key": "Authorization",
+								"value": "Basic dXNlcjpiaXRuYW1p"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "    <project>\n        <default-context-id type=\"integer\" nil=\"true\"/>\n        <default-tags>{{$randomUserName}}</default-tags>\n        <description>{{$randomEmail}}</description>\n        <name></name>\n        <state>active</state>\n    </project>"
+						},
+						"url": {
+							"raw": "{{ws-tracks}}/projects/{{projectID}}.xml",
+							"host": [
+								"{{ws-tracks}}"
+							],
+							"path": [
+								"projects",
+								"{{projectID}}.xml"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Name already exists",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"var jsonObject = xml2Json(responseBody);\r",
+									"\r",
+									"pm.test(\"Status code is 409\", function () {\r",
+									"    pm.response.to.have.status(409);\r",
+									"});"
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"method": "PUT",
+						"header": [
+							{
+								"key": "Content-Type",
+								"value": "text/xml"
+							},
+							{
+								"key": "Authorization",
+								"value": "Basic dXNlcjpiaXRuYW1p"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "    <project>\n        <default-context-id type=\"integer\" nil=\"true\"/>\n        <default-tags>{{$randomUserName}}</default-tags>\n        <description>{{$randomEmail}}</description>\n        <name>123</name>\n        <state>active</state>\n    </project>"
+						},
+						"url": {
+							"raw": "{{ws-tracks}}/projects/{{projectID}}.xml",
+							"host": [
+								"{{ws-tracks}}"
+							],
+							"path": [
+								"projects",
+								"{{projectID}}.xml"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Name is missing",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"var jsonObject = xml2Json(responseBody);\r",
+									"\r",
+									"pm.test(\"Status code is 200\", function () {\r",
+									"    pm.response.to.have.status(200);\r",
+									"});"
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"method": "PUT",
+						"header": [
+							{
+								"key": "Content-Type",
+								"value": "text/xml"
+							},
+							{
+								"key": "Authorization",
+								"value": "Basic dXNlcjpiaXRuYW1p"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "    <project>\n        <default-context-id type=\"integer\" nil=\"true\"/>\n        <default-tags>{{$randomUserName}}</default-tags>\n        <description>{{$randomEmail}}</description>\n        <state>active</state>\n    </project>"
+						},
+						"url": {
+							"raw": "{{ws-tracks}}/projects/{{projectID}}.xml",
+							"host": [
+								"{{ws-tracks}}"
+							],
+							"path": [
+								"projects",
+								"{{projectID}}.xml"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Name 255 characters long",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"var jsonObject = xml2Json(responseBody);\r",
+									"\r",
+									"pm.test(\"Status code is 200\", function () {\r",
+									"    pm.response.to.have.status(200);\r",
+									"});"
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"method": "PUT",
+						"header": [
+							{
+								"key": "Content-Type",
+								"value": "text/xml"
+							},
+							{
+								"key": "Authorization",
+								"value": "Basic dXNlcjpiaXRuYW1p"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "    <project>\n        <default-context-id type=\"integer\" nil=\"true\"/>\n        <default-tags>{{$randomUserName}}</default-tags>\n        <description>{{$randomEmail}}</description>\n        <name>{{$randomUUID}}000012345678901234567890123456789012345678901234567890123456789012345678901234567890123456789012345678901234567890123456789012345678901234567890123456789012345678901234567890123456789012345678901234567890123456789012345</name>\n        <state>active</state>\n    </project>"
+						},
+						"url": {
+							"raw": "{{ws-tracks}}/projects/{{projectID}}.xml",
+							"host": [
+								"{{ws-tracks}}"
+							],
+							"path": [
+								"projects",
+								"{{projectID}}.xml"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Name 256 characters long Copy",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"var jsonObject = xml2Json(responseBody);\r",
+									"\r",
+									"pm.test(\"Status code is 200\", function () {\r",
+									"    pm.response.to.have.status(200);\r",
+									"});"
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"method": "PUT",
+						"header": [
+							{
+								"key": "Content-Type",
+								"value": "text/xml"
+							},
+							{
+								"key": "Authorization",
+								"value": "Basic dXNlcjpiaXRuYW1p"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "    <project>\n        <default-context-id type=\"integer\" nil=\"true\"/>\n        <default-tags>{{$randomUserName}}</default-tags>\n        <description>{{$randomEmail}}</description>\n        <name>{{$randomUUID}}0000123456789012345678901234567890123456789012345678901234567890123456789012345678901234567890123456789012345678901234567890123456789012345678901234567890123456789012345678901234567890123456789012345678901234567890123456</name>\n        <state>active</state>\n    </project>"
+						},
+						"url": {
+							"raw": "{{ws-tracks}}/projects/{{projectID}}.xml",
+							"host": [
+								"{{ws-tracks}}"
+							],
+							"path": [
+								"projects",
+								"{{projectID}}.xml"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Name 257 characters long",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"var jsonObject = xml2Json(responseBody);\r",
+									"\r",
+									"pm.test(\"Status code is 409\", function () {\r",
+									"    pm.response.to.have.status(409);\r",
+									"});"
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"method": "PUT",
+						"header": [
+							{
+								"key": "Content-Type",
+								"value": "text/xml"
+							},
+							{
+								"key": "Authorization",
+								"value": "Basic dXNlcjpiaXRuYW1p"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "    <project>\n        <default-context-id type=\"integer\" nil=\"true\"/>\n        <default-tags>{{$randomUserName}}</default-tags>\n        <description>{{$randomEmail}}</description>\n        <name>{{$randomUUID}}00001234567890123456789012345678901234567890123456789012345678901234567890123456789012345678901234567890123456789012345678901234567890123456789012345678901234567890123456789012345678901234567890123456789012345678901234567</name>\n        <state>active</state>\n    </project>"
+						},
+						"url": {
+							"raw": "{{ws-tracks}}/projects/{{projectID}}.xml",
+							"host": [
+								"{{ws-tracks}}"
+							],
+							"path": [
+								"projects",
+								"{{projectID}}.xml"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "State is hidden",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"var jsonObject = xml2Json(responseBody);\r",
+									"\r",
+									"pm.test(\"Status code is 200\", function () {\r",
+									"    pm.response.to.have.status(200);\r",
+									"});"
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"method": "PUT",
+						"header": [
+							{
+								"key": "Content-Type",
+								"value": "text/xml"
+							},
+							{
+								"key": "Authorization",
+								"value": "Basic dXNlcjpiaXRuYW1p"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "    <project>\n        <default-context-id type=\"integer\" nil=\"true\"/>\n        <default-tags>{{$randomUserName}}</default-tags>\n        <description>{{$randomEmail}}</description>\n        <name>{{$randomFirstName}}</name>\n        <state>hidden</state>\n    </project>"
+						},
+						"url": {
+							"raw": "{{ws-tracks}}/projects/{{projectID}}.xml",
+							"host": [
+								"{{ws-tracks}}"
+							],
+							"path": [
+								"projects",
+								"{{projectID}}.xml"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "State is completed",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"var jsonObject = xml2Json(responseBody);\r",
+									"\r",
+									"pm.test(\"Status code is 200\", function () {\r",
+									"    pm.response.to.have.status(200);\r",
+									"});"
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"method": "PUT",
+						"header": [
+							{
+								"key": "Content-Type",
+								"value": "text/xml"
+							},
+							{
+								"key": "Authorization",
+								"value": "Basic dXNlcjpiaXRuYW1p"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "    <project>\n        <default-context-id type=\"integer\" nil=\"true\"/>\n        <default-tags>{{$randomUserName}}</default-tags>\n        <description>{{$randomEmail}}</description>\n        <name>{{$randomFirstName}}</name>\n        <state>completed</state>\n    </project>"
+						},
+						"url": {
+							"raw": "{{ws-tracks}}/projects/{{projectID}}.xml",
+							"host": [
+								"{{ws-tracks}}"
+							],
+							"path": [
+								"projects",
+								"{{projectID}}.xml"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "State is empty",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"var jsonObject = xml2Json(responseBody);\r",
+									"\r",
+									"pm.test(\"Status code is 200\", function () {\r",
+									"    pm.response.to.have.status(200);\r",
+									"});"
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"method": "PUT",
+						"header": [
+							{
+								"key": "Content-Type",
+								"value": "text/xml"
+							},
+							{
+								"key": "Authorization",
+								"value": "Basic dXNlcjpiaXRuYW1p"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "    <project>\n        <default-context-id type=\"integer\" nil=\"true\"/>\n        <default-tags>{{$randomUserName}}</default-tags>\n        <description>{{$randomEmail}}</description>\n        <name>{{$randomFirstName}}</name>\n        <state></state>\n    </project>"
+						},
+						"url": {
+							"raw": "{{ws-tracks}}/projects/{{projectID}}.xml",
+							"host": [
+								"{{ws-tracks}}"
+							],
+							"path": [
+								"projects",
+								"{{projectID}}.xml"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "State is missing",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"var jsonObject = xml2Json(responseBody);\r",
+									"\r",
+									"pm.test(\"Status code is 200\", function () {\r",
+									"    pm.response.to.have.status(200);\r",
+									"});"
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"method": "PUT",
+						"header": [
+							{
+								"key": "Content-Type",
+								"value": "text/xml"
+							},
+							{
+								"key": "Authorization",
+								"value": "Basic dXNlcjpiaXRuYW1p"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "    <project>\n        <default-context-id type=\"integer\" nil=\"true\"/>\n        <default-tags>{{$randomUserName}}</default-tags>\n        <description>{{$randomEmail}}</description>\n        <name>{{$randomFirstName}}</name>\n    </project>"
+						},
+						"url": {
+							"raw": "{{ws-tracks}}/projects/{{projectID}}.xml",
+							"host": [
+								"{{ws-tracks}}"
+							],
+							"path": [
+								"projects",
+								"{{projectID}}.xml"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Specify wrong state",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"var jsonObject = xml2Json(responseBody);\r",
+									"\r",
+									"pm.test(\"Status code is 200\", function () {\r",
+									"    pm.response.to.have.status(200);\r",
+									"});"
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"method": "PUT",
+						"header": [
+							{
+								"key": "Content-Type",
+								"value": "text/xml"
+							},
+							{
+								"key": "Authorization",
+								"value": "Basic dXNlcjpiaXRuYW1p"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "    <project>\n        <default-context-id type=\"integer\" nil=\"true\"/>\n        <default-tags>{{$randomUserName}}</default-tags>\n        <description>{{$randomEmail}}</description>\n        <name>{{$randomFirstName}}</name>\n        <state>123</state>\n    </project>"
+						},
+						"url": {
+							"raw": "{{ws-tracks}}/projects/{{projectID}}.xml",
+							"host": [
+								"{{ws-tracks}}"
+							],
+							"path": [
+								"projects",
+								"{{projectID}}.xml"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "default-context-id type = string",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"var jsonObject = xml2Json(responseBody);\r",
+									"\r",
+									"pm.test(\"Status code is 200\", function () {\r",
+									"    pm.response.to.have.status(200);\r",
+									"});"
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"method": "PUT",
+						"header": [
+							{
+								"key": "Content-Type",
+								"value": "text/xml"
+							},
+							{
+								"key": "Authorization",
+								"value": "Basic dXNlcjpiaXRuYW1p"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "    <project>\n        <default-context-id type=\"string\" nil=\"true\"/>\n        <default-tags>{{$randomUserName}}</default-tags>\n        <description>{{$randomEmail}}</description>\n        <name>{{$randomFirstName}}</name>\n        <state>active</state>\n    </project>"
+						},
+						"url": {
+							"raw": "{{ws-tracks}}/projects/{{projectID}}.xml",
+							"host": [
+								"{{ws-tracks}}"
+							],
+							"path": [
+								"projects",
+								"{{projectID}}.xml"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "default-context-id type = boolean",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"var jsonObject = xml2Json(responseBody);\r",
+									"\r",
+									"pm.test(\"Status code is 200\", function () {\r",
+									"    pm.response.to.have.status(200);\r",
+									"});"
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"method": "PUT",
+						"header": [
+							{
+								"key": "Content-Type",
+								"value": "text/xml"
+							},
+							{
+								"key": "Authorization",
+								"value": "Basic dXNlcjpiaXRuYW1p"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "    <project>\n        <default-context-id type=\"boolean\" nil=\"true\"/>\n        <default-tags>{{$randomUserName}}</default-tags>\n        <description>{{$randomEmail}}</description>\n        <name>{{$randomFirstName}}</name>\n        <state>active</state>\n    </project>"
+						},
+						"url": {
+							"raw": "{{ws-tracks}}/projects/{{projectID}}.xml",
+							"host": [
+								"{{ws-tracks}}"
+							],
+							"path": [
+								"projects",
+								"{{projectID}}.xml"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "default-context-id nil = false",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"var jsonObject = xml2Json(responseBody);\r",
+									"\r",
+									"pm.test(\"Status code is 200\", function () {\r",
+									"    pm.response.to.have.status(200);\r",
+									"});"
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"method": "PUT",
+						"header": [
+							{
+								"key": "Content-Type",
+								"value": "text/xml"
+							},
+							{
+								"key": "Authorization",
+								"value": "Basic dXNlcjpiaXRuYW1p"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "    <project>\n        <default-context-id type=\"integer\" nil=\"false\"/>\n        <default-tags>{{$randomUserName}}</default-tags>\n        <description>{{$randomEmail}}</description>\n        <name>{{$randomFirstName}}</name>\n        <state>active</state>\n    </project>"
+						},
+						"url": {
+							"raw": "{{ws-tracks}}/projects/{{projectID}}.xml",
+							"host": [
+								"{{ws-tracks}}"
+							],
+							"path": [
+								"projects",
+								"{{projectID}}.xml"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "default-context-id is empty",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"var jsonObject = xml2Json(responseBody);\r",
+									"\r",
+									"pm.test(\"Status code is 200\", function () {\r",
+									"    pm.response.to.have.status(200);\r",
+									"});"
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"method": "PUT",
+						"header": [
+							{
+								"key": "Content-Type",
+								"value": "text/xml"
+							},
+							{
+								"key": "Authorization",
+								"value": "Basic dXNlcjpiaXRuYW1p"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "    <project>\n        <default-context-id type=\"\" nil=\"\"/>\n        <default-tags>{{$randomUserName}}</default-tags>\n        <description>{{$randomEmail}}</description>\n        <name>{{$randomFirstName}}</name>\n        <state>active</state>\n    </project>"
+						},
+						"url": {
+							"raw": "{{ws-tracks}}/projects/{{projectID}}.xml",
+							"host": [
+								"{{ws-tracks}}"
+							],
+							"path": [
+								"projects",
+								"{{projectID}}.xml"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "default-context-id is missing",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"var jsonObject = xml2Json(responseBody);\r",
+									"\r",
+									"pm.test(\"Status code is 200\", function () {\r",
+									"    pm.response.to.have.status(200);\r",
+									"});"
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"method": "PUT",
+						"header": [
+							{
+								"key": "Content-Type",
+								"value": "text/xml"
+							},
+							{
+								"key": "Authorization",
+								"value": "Basic dXNlcjpiaXRuYW1p"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "    <project>\n        <default-tags>{{$randomUserName}}</default-tags>\n        <description>{{$randomEmail}}</description>\n        <name>{{$randomFirstName}}</name>\n        <state>active</state>\n    </project>"
+						},
+						"url": {
+							"raw": "{{ws-tracks}}/projects/{{projectID}}.xml",
+							"host": [
+								"{{ws-tracks}}"
+							],
+							"path": [
+								"projects",
+								"{{projectID}}.xml"
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "Delete Project ID",
+			"item": [
+				{
+					"name": "Delete project",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"var jsonObject = xml2Json(responseBody);\r",
+									"\r",
+									"pm.test(\"Status code is 200\", function () {\r",
+									"    pm.response.to.have.status(200);\r",
+									"});"
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"method": "DELETE",
+						"header": [
+							{
+								"key": "Content-Type",
+								"value": "text/xml"
+							},
+							{
+								"key": "Authorization",
+								"value": "Basic dXNlcjpiaXRuYW1p"
+							}
+						],
+						"url": {
+							"raw": "{{ws-tracks}}/projects/{{projectID}}.xml",
+							"host": [
+								"{{ws-tracks}}"
+							],
+							"path": [
+								"projects",
+								"{{projectID}}.xml"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Delete project No Auth",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"var jsonObject = xml2Json(responseBody);\r",
+									"\r",
+									"pm.test(\"Status code is 200\", function () {\r",
+									"    pm.response.to.have.status(200);\r",
+									"});"
+								],
+								"type": "text/javascript"
+							}
+						},
+						{
+							"listen": "prerequest",
+							"script": {
+								"exec": [
+									"const jar = pm.cookies.jar();\r",
+									"\r",
+									"pm.request.url.host = [pm.environment.get(\"ws-tracks\")];\r",
+									"jar.clear(pm.request.url, (error) => {\r",
+									"    if (error)\r",
+									"        console.error(error);\r",
+									"});\r",
+									"\r",
+									"//Скрипт на автоматическую очистку кук все равно не работает :("
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"auth": {
+							"type": "noauth"
+						},
+						"method": "DELETE",
+						"header": [
+							{
+								"key": "Content-Type",
+								"value": "text/xml"
+							},
+							{
+								"key": "Authorization",
+								"value": "Basic dXNlcjpiaXRuYW1p"
+							}
+						],
+						"url": {
+							"raw": "{{ws-tracks}}/projects/{{projectID}}.xml",
+							"host": [
+								"{{ws-tracks}}"
+							],
+							"path": [
+								"projects",
+								"{{projectID}}.xml"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Project doesn't exist",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"var jsonObject = xml2Json(responseBody);\r",
+									"\r",
+									"pm.test(\"Status code is 404\", function () {\r",
+									"    pm.response.to.have.status(404);\r",
+									"});"
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"method": "DELETE",
+						"header": [
+							{
+								"key": "Content-Type",
+								"value": "text/xml"
+							},
+							{
+								"key": "Authorization",
+								"value": "Basic dXNlcjpiaXRuYW1p"
+							}
+						],
+						"url": {
+							"raw": "{{ws-tracks}}/projects/999999.xml",
+							"host": [
+								"{{ws-tracks}}"
+							],
+							"path": [
+								"projects",
+								"999999.xml"
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "Get Project ID ToDOs",
+			"item": [
+				{
+					"name": "Get Project ID ToDos",
+					"event": [
+						{
+							"listen": "prerequest",
+							"script": {
+								"exec": [
+									"\r",
+									""
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"method": "GET",
+						"header": [
+							{
+								"key": "Content-Type",
+								"value": "text/xml"
+							},
+							{
+								"key": "Authorization",
+								"value": "Basic dXNlcjpiaXRuYW1p"
+							}
+						],
+						"url": {
+							"raw": "{{ws-tracks}}/projects/{{projectID}}/todos.xml",
+							"host": [
+								"{{ws-tracks}}"
+							],
+							"path": [
+								"projects",
+								"{{projectID}}",
+								"todos.xml"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Get Project ID ToDos No Auth",
+					"event": [
+						{
+							"listen": "prerequest",
+							"script": {
+								"exec": [
+									"const jar = pm.cookies.jar();\r",
+									"\r",
+									"pm.request.url.host = [pm.environment.get(\"ws-tracks\")];\r",
+									"jar.clear(pm.request.url, (error) => {\r",
+									"    if (error)\r",
+									"        console.error(error);\r",
+									"});\r",
+									"\r",
+									"//Скрипт на автоматическую очистку кук все равно не работает :("
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"auth": {
+							"type": "noauth"
+						},
+						"method": "GET",
+						"header": [
+							{
+								"key": "Content-Type",
+								"value": "text/xml"
+							},
+							{
+								"key": "Authorization",
+								"value": "Basic dXNlcjpiaXRuYW1p"
+							}
+						],
+						"url": {
+							"raw": "{{ws-tracks}}/projects/{{projectID}}/todos.xml",
+							"host": [
+								"{{ws-tracks}}"
+							],
+							"path": [
+								"projects",
+								"{{projectID}}",
+								"todos.xml"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Project Doesn't Exist",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"var jsonObject = xml2Json(responseBody);\r",
+									"\r",
+									"pm.test(\"Status code is 404\", function () {\r",
+									"    pm.response.to.have.status(404);\r",
+									"});"
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"method": "GET",
+						"header": [
+							{
+								"key": "Content-Type",
+								"value": "text/xml"
+							},
+							{
+								"key": "Authorization",
+								"value": "Basic dXNlcjpiaXRuYW1p"
+							}
+						],
+						"url": {
+							"raw": "{{ws-tracks}}/projects/999999/todos.xml",
+							"host": [
+								"{{ws-tracks}}"
+							],
+							"path": [
+								"projects",
+								"999999",
+								"todos.xml"
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "Sequences",
+			"item": [
+				{
+					"name": "Simple Path",
+					"item": [
+						{
+							"name": "Add Project",
+							"event": [
+								{
+									"listen": "test",
+									"script": {
+										"exec": [
+											"const json = xml2Json(responseBody);\r",
+											"const id = pm.response.headers.get('text')\r",
+											"pm.collectionVariables.set(\"projectID\", id);\r",
+											"\r",
+											"pm.test(\"Status code is 201\", function () {\r",
+											"    pm.response.to.have.status(201);\r",
+											"});\r",
+											"\r",
+											""
+										],
+										"type": "text/javascript"
+									}
+								}
+							],
+							"request": {
+								"method": "POST",
+								"header": [
+									{
+										"key": "Content-Type",
+										"value": "text/xml"
+									},
+									{
+										"key": "Authorization",
+										"value": "Basic dXNlcjpiaXRuYW1p"
+									}
+								],
+								"body": {
+									"mode": "raw",
+									"raw": "    <project>\n        <default-context-id type=\"integer\" nil=\"true\"/>\n        <default-tags>{{$randomUserName}}</default-tags>\n        <description>{{$randomEmail}}</description>\n        <name>{{$randomFirstName}}</name>\n    </project>"
+								},
+								"url": {
+									"raw": "{{ws-tracks}}/projects.xml",
+									"host": [
+										"{{ws-tracks}}"
+									],
+									"path": [
+										"projects.xml"
+									]
+								},
+								"description": "\nGenerated from a curl request: \\ncurl -u user:bitnami -H \\\"Content-Type: text/xml\\\" -d \\\n'<project><name><![CDATA[<img src=logout/> ]]> This Project Will Log You Out</name></project>' http://192.168.1.147/projects.xml -i"
+							},
+							"response": []
+						},
+						{
+							"name": "Show Added Project",
+							"request": {
+								"method": "GET",
+								"header": [
+									{
+										"key": "Content-Type",
+										"value": "text/xml"
+									},
+									{
+										"key": "Authorization",
+										"value": "Basic dXNlcjpiaXRuYW1p"
+									}
+								],
+								"url": {
+									"raw": "{{ws-tracks}}/projects/{{projectID}}.xml",
+									"host": [
+										"{{ws-tracks}}"
+									],
+									"path": [
+										"projects",
+										"{{projectID}}.xml"
+									]
+								},
+								"description": "Get projects.xml"
+							},
+							"response": []
+						},
+						{
+							"name": "Edit Project",
+							"event": [
+								{
+									"listen": "test",
+									"script": {
+										"exec": [
+											"var jsonObject = xml2Json(responseBody);\r",
+											"\r",
+											"pm.test(\"Status code is 200\", function () {\r",
+											"    pm.response.to.have.status(200);\r",
+											"});"
+										],
+										"type": "text/javascript"
+									}
+								}
+							],
+							"request": {
+								"method": "PUT",
+								"header": [
+									{
+										"key": "Content-Type",
+										"value": "text/xml"
+									},
+									{
+										"key": "Authorization",
+										"value": "Basic dXNlcjpiaXRuYW1p"
+									}
+								],
+								"body": {
+									"mode": "raw",
+									"raw": "    <project>\n        <default-context-id type=\"integer\" nil=\"true\"/>\n        <default-tags>{{$randomUserName}}</default-tags>\n        <description>{{$randomEmail}}</description>\n        <name>{{$randomFirstName}}</name>\n        <state>completed</state>\n    </project>"
+								},
+								"url": {
+									"raw": "{{ws-tracks}}/projects/{{projectID}}.xml",
+									"host": [
+										"{{ws-tracks}}"
+									],
+									"path": [
+										"projects",
+										"{{projectID}}.xml"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "Show Edited Project",
+							"request": {
+								"method": "GET",
+								"header": [
+									{
+										"key": "Content-Type",
+										"value": "text/xml"
+									},
+									{
+										"key": "Authorization",
+										"value": "Basic dXNlcjpiaXRuYW1p"
+									}
+								],
+								"url": {
+									"raw": "{{ws-tracks}}/projects/{{projectID}}.xml",
+									"host": [
+										"{{ws-tracks}}"
+									],
+									"path": [
+										"projects",
+										"{{projectID}}.xml"
+									]
+								},
+								"description": "Get projects.xml"
+							},
+							"response": []
+						},
+						{
+							"name": "Show Project ID ToDOs",
+							"request": {
+								"method": "GET",
+								"header": [
+									{
+										"key": "Content-Type",
+										"value": "text/xml"
+									},
+									{
+										"key": "Authorization",
+										"value": "Basic dXNlcjpiaXRuYW1p"
+									}
+								],
+								"url": {
+									"raw": "{{ws-tracks}}/projects/{{projectID}}/todos.xml",
+									"host": [
+										"{{ws-tracks}}"
+									],
+									"path": [
+										"projects",
+										"{{projectID}}",
+										"todos.xml"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "Delete project",
+							"event": [
+								{
+									"listen": "test",
+									"script": {
+										"exec": [
+											"var jsonObject = xml2Json(responseBody);\r",
+											"\r",
+											"pm.test(\"Status code is 200\", function () {\r",
+											"    pm.response.to.have.status(200);\r",
+											"});"
+										],
+										"type": "text/javascript"
+									}
+								}
+							],
+							"request": {
+								"method": "DELETE",
+								"header": [
+									{
+										"key": "Content-Type",
+										"value": "text/xml"
+									},
+									{
+										"key": "Authorization",
+										"value": "Basic dXNlcjpiaXRuYW1p"
+									}
+								],
+								"url": {
+									"raw": "{{ws-tracks}}/projects/{{projectID}}.xml",
+									"host": [
+										"{{ws-tracks}}"
+									],
+									"path": [
+										"projects",
+										"{{projectID}}.xml"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "Show Deleted Project",
+							"request": {
+								"method": "GET",
+								"header": [
+									{
+										"key": "Content-Type",
+										"value": "text/xml"
+									},
+									{
+										"key": "Authorization",
+										"value": "Basic dXNlcjpiaXRuYW1p"
+									}
+								],
+								"url": {
+									"raw": "{{ws-tracks}}/projects/{{projectID}}.xml",
+									"host": [
+										"{{ws-tracks}}"
+									],
+									"path": [
+										"projects",
+										"{{projectID}}.xml"
+									]
+								},
+								"description": "Get projects.xml"
+							},
+							"response": []
+						},
+						{
+							"name": "Show Deleted Project ID ToDOs",
+							"request": {
+								"method": "GET",
+								"header": [
+									{
+										"key": "Content-Type",
+										"value": "text/xml"
+									},
+									{
+										"key": "Authorization",
+										"value": "Basic dXNlcjpiaXRuYW1p"
+									}
+								],
+								"url": {
+									"raw": "{{ws-tracks}}/projects/{{projectID}}/todos.xml",
+									"host": [
+										"{{ws-tracks}}"
+									],
+									"path": [
+										"projects",
+										"{{projectID}}",
+										"todos.xml"
+									]
+								}
+							},
+							"response": []
+						}
+					]
+				},
+				{
+					"name": "Amend project after it was deleted",
+					"item": [
+						{
+							"name": "Add Project",
+							"event": [
+								{
+									"listen": "test",
+									"script": {
+										"exec": [
+											"const json = xml2Json(responseBody);\r",
+											"const id = pm.response.headers.get('text')\r",
+											"pm.collectionVariables.set(\"projectID\", id);\r",
+											"\r",
+											"pm.test(\"Status code is 201\", function () {\r",
+											"    pm.response.to.have.status(201);\r",
+											"});\r",
+											"\r",
+											""
+										],
+										"type": "text/javascript"
+									}
+								}
+							],
+							"request": {
+								"method": "POST",
+								"header": [
+									{
+										"key": "Content-Type",
+										"value": "text/xml"
+									},
+									{
+										"key": "Authorization",
+										"value": "Basic dXNlcjpiaXRuYW1p"
+									}
+								],
+								"body": {
+									"mode": "raw",
+									"raw": "    <project>\n        <default-context-id type=\"integer\" nil=\"true\"/>\n        <default-tags>{{$randomUserName}}</default-tags>\n        <description>{{$randomEmail}}</description>\n        <name>{{$randomFirstName}}</name>\n    </project>"
+								},
+								"url": {
+									"raw": "{{ws-tracks}}/projects.xml",
+									"host": [
+										"{{ws-tracks}}"
+									],
+									"path": [
+										"projects.xml"
+									]
+								},
+								"description": "\nGenerated from a curl request: \\ncurl -u user:bitnami -H \\\"Content-Type: text/xml\\\" -d \\\n'<project><name><![CDATA[<img src=logout/> ]]> This Project Will Log You Out</name></project>' http://192.168.1.147/projects.xml -i"
+							},
+							"response": []
+						},
+						{
+							"name": "Edit Project",
+							"event": [
+								{
+									"listen": "test",
+									"script": {
+										"exec": [
+											"var jsonObject = xml2Json(responseBody);\r",
+											"\r",
+											"pm.test(\"Status code is 200\", function () {\r",
+											"    pm.response.to.have.status(200);\r",
+											"});"
+										],
+										"type": "text/javascript"
+									}
+								}
+							],
+							"request": {
+								"method": "PUT",
+								"header": [
+									{
+										"key": "Content-Type",
+										"value": "text/xml"
+									},
+									{
+										"key": "Authorization",
+										"value": "Basic dXNlcjpiaXRuYW1p"
+									}
+								],
+								"body": {
+									"mode": "raw",
+									"raw": "    <project>\n        <default-context-id type=\"integer\" nil=\"true\"/>\n        <default-tags>{{$randomUserName}}</default-tags>\n        <description>{{$randomEmail}}</description>\n        <name>{{$randomFirstName}}</name>\n        <state>completed</state>\n    </project>"
+								},
+								"url": {
+									"raw": "{{ws-tracks}}/projects/{{projectID}}.xml",
+									"host": [
+										"{{ws-tracks}}"
+									],
+									"path": [
+										"projects",
+										"{{projectID}}.xml"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "Delete project",
+							"event": [
+								{
+									"listen": "test",
+									"script": {
+										"exec": [
+											"var jsonObject = xml2Json(responseBody);\r",
+											"\r",
+											"pm.test(\"Status code is 200\", function () {\r",
+											"    pm.response.to.have.status(200);\r",
+											"});"
+										],
+										"type": "text/javascript"
+									}
+								}
+							],
+							"request": {
+								"method": "DELETE",
+								"header": [
+									{
+										"key": "Content-Type",
+										"value": "text/xml"
+									},
+									{
+										"key": "Authorization",
+										"value": "Basic dXNlcjpiaXRuYW1p"
+									}
+								],
+								"url": {
+									"raw": "{{ws-tracks}}/projects/{{projectID}}.xml",
+									"host": [
+										"{{ws-tracks}}"
+									],
+									"path": [
+										"projects",
+										"{{projectID}}.xml"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "Edit Deleted Project",
+							"event": [
+								{
+									"listen": "test",
+									"script": {
+										"exec": [
+											"var jsonObject = xml2Json(responseBody);\r",
+											"\r",
+											"pm.test(\"Status code is 404\", function () {\r",
+											"    pm.response.to.have.status(404);\r",
+											"});"
+										],
+										"type": "text/javascript"
+									}
+								}
+							],
+							"request": {
+								"method": "PUT",
+								"header": [
+									{
+										"key": "Content-Type",
+										"value": "text/xml"
+									},
+									{
+										"key": "Authorization",
+										"value": "Basic dXNlcjpiaXRuYW1p"
+									}
+								],
+								"body": {
+									"mode": "raw",
+									"raw": "    <project>\n        <default-context-id type=\"integer\" nil=\"true\"/>\n        <default-tags>{{$randomUserName}}</default-tags>\n        <description>{{$randomEmail}}</description>\n        <name>{{$randomFirstName}}</name>\n        <state>completed</state>\n    </project>"
+								},
+								"url": {
+									"raw": "{{ws-tracks}}/projects/{{projectID}}.xml",
+									"host": [
+										"{{ws-tracks}}"
+									],
+									"path": [
+										"projects",
+										"{{projectID}}.xml"
+									]
+								}
+							},
+							"response": []
+						}
+					]
+				},
+				{
+					"name": "Amend project > rename it to the name it already has",
+					"item": [
+						{
+							"name": "Add Project",
+							"event": [
+								{
+									"listen": "test",
+									"script": {
+										"exec": [
+											"const json = xml2Json(responseBody);\r",
+											"const id = pm.response.headers.get('text')\r",
+											"pm.collectionVariables.set(\"projectID\", id);\r",
+											"\r",
+											"pm.test(\"Status code is 201\", function () {\r",
+											"    pm.response.to.have.status(201);\r",
+											"});\r",
+											"\r",
+											""
+										],
+										"type": "text/javascript"
+									}
+								},
+								{
+									"listen": "prerequest",
+									"script": {
+										"exec": [
+											""
+										],
+										"type": "text/javascript"
+									}
+								}
+							],
+							"request": {
+								"method": "POST",
+								"header": [
+									{
+										"key": "Content-Type",
+										"value": "text/xml"
+									},
+									{
+										"key": "Authorization",
+										"value": "Basic dXNlcjpiaXRuYW1p"
+									}
+								],
+								"body": {
+									"mode": "raw",
+									"raw": "    <project>\n        <default-context-id type=\"integer\" nil=\"true\"/>\n        <default-tags>{{$randomUserName}}</default-tags>\n        <description>{{$randomEmail}}</description>\n        <name>{{$randomFirstName}}</name>\n    </project>"
+								},
+								"url": {
+									"raw": "{{ws-tracks}}/projects.xml",
+									"host": [
+										"{{ws-tracks}}"
+									],
+									"path": [
+										"projects.xml"
+									]
+								},
+								"description": "\nGenerated from a curl request: \\ncurl -u user:bitnami -H \\\"Content-Type: text/xml\\\" -d \\\n'<project><name><![CDATA[<img src=logout/> ]]> This Project Will Log You Out</name></project>' http://192.168.1.147/projects.xml -i"
+							},
+							"response": []
+						},
+						{
+							"name": "Show Added Project",
+							"event": [
+								{
+									"listen": "test",
+									"script": {
+										"exec": [
+											"const jsonObject = xml2Json(responseBody);\r",
+											"const name = jsonObject.project.name\r",
+											"\r",
+											"pm.environment.set(\"name\", name);"
+										],
+										"type": "text/javascript"
+									}
+								}
+							],
+							"request": {
+								"method": "GET",
+								"header": [
+									{
+										"key": "Content-Type",
+										"value": "text/xml"
+									},
+									{
+										"key": "Authorization",
+										"value": "Basic dXNlcjpiaXRuYW1p"
+									}
+								],
+								"url": {
+									"raw": "{{ws-tracks}}/projects/{{projectID}}.xml",
+									"host": [
+										"{{ws-tracks}}"
+									],
+									"path": [
+										"projects",
+										"{{projectID}}.xml"
+									]
+								},
+								"description": "Get projects.xml"
+							},
+							"response": []
+						},
+						{
+							"name": "Edit Project",
+							"event": [
+								{
+									"listen": "test",
+									"script": {
+										"exec": [
+											"var jsonObject = xml2Json(responseBody);\r",
+											"\r",
+											"pm.test(\"Status code is 200\", function () {\r",
+											"    pm.response.to.have.status(200);\r",
+											"});"
+										],
+										"type": "text/javascript"
+									}
+								}
+							],
+							"request": {
+								"method": "PUT",
+								"header": [
+									{
+										"key": "Content-Type",
+										"value": "text/xml"
+									},
+									{
+										"key": "Authorization",
+										"value": "Basic dXNlcjpiaXRuYW1p"
+									}
+								],
+								"body": {
+									"mode": "raw",
+									"raw": "    <project>\n        <default-context-id type=\"integer\" nil=\"true\"/>\n        <default-tags>{{$randomUserName}}</default-tags>\n        <description>{{$randomEmail}}</description>\n        <name>{{name}}</name>\n        <state>completed</state>\n    </project>"
+								},
+								"url": {
+									"raw": "{{ws-tracks}}/projects/{{projectID}}.xml",
+									"host": [
+										"{{ws-tracks}}"
+									],
+									"path": [
+										"projects",
+										"{{projectID}}.xml"
+									]
+								}
+							},
+							"response": []
+						}
+					]
+				}
+			]
+		}
+	],
+	"auth": {
+		"type": "basic",
+		"basic": [
+			{
+				"key": "password",
+				"value": "iedhxd",
+				"type": "string"
+			},
+			{
+				"key": "username",
+				"value": "studentws17",
+				"type": "string"
+			}
+		]
+	},
+	"event": [
+		{
+			"listen": "prerequest",
+			"script": {
+				"type": "text/javascript",
+				"exec": [
+					""
+				]
+			}
+		},
+		{
+			"listen": "test",
+			"script": {
+				"type": "text/javascript",
+				"exec": [
+					""
+				]
+			}
+		}
+	],
+	"variable": [
+		{
+			"key": "projectID",
+			"value": ""
+		}
+	]
+}

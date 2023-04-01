@@ -1,0 +1,206 @@
+{
+	"info": {
+		"_postman_id": "2bff0b0a-ab8d-4a7f-85d1-09baed8e0300",
+		"name": "SWAPI",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
+	},
+	"item": [
+		{
+			"name": "get_All_Endpoints",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "{{url}}",
+					"host": [
+						"{{url}}"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "get_All_People",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"const json = pm.response.json()\r",
+							"console.log(json.results[3].name)"
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "{{url}}/people?page=2",
+					"host": [
+						"{{url}}"
+					],
+					"path": [
+						"people"
+					],
+					"query": [
+						{
+							"key": "page",
+							"value": "2"
+						}
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "get_People_Schema",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "{{url}}/people/schema",
+					"host": [
+						"{{url}}"
+					],
+					"path": [
+						"people",
+						"schema"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "get_Next_Page",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "{{url}}/people/?page=2",
+					"host": [
+						"{{url}}"
+					],
+					"path": [
+						"people",
+						""
+					],
+					"query": [
+						{
+							"key": "page",
+							"value": "2"
+						}
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "get_Starships_Description",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"const json = pm.response.json()\r",
+							""
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "{{url}}/starships/schema",
+					"host": [
+						"{{url}}"
+					],
+					"path": [
+						"starships",
+						"schema"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "get_Han_Solo_ID",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							""
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "{{url}}/people/14",
+					"host": [
+						"{{url}}"
+					],
+					"path": [
+						"people",
+						"14"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "get_Han_Solo_Wookiee",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "{{url}}/people/14?format=wookiee",
+					"host": [
+						"{{url}}"
+					],
+					"path": [
+						"people",
+						"14"
+					],
+					"query": [
+						{
+							"key": "format",
+							"value": "wookiee"
+						}
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "get_Obi",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "{{url}}/people?search=Obi-Wan Kenobi",
+					"host": [
+						"{{url}}"
+					],
+					"path": [
+						"people"
+					],
+					"query": [
+						{
+							"key": "search",
+							"value": "Obi-Wan Kenobi"
+						}
+					]
+				}
+			},
+			"response": []
+		}
+	]
+}
